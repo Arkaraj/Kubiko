@@ -1,0 +1,25 @@
+{
+  "name": "kuebiko",
+  "version": "1.0.0",
+  "description": "A easy to use Live Quizzing and Polling Web app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "run": "node app.js"
+  },
+  "keywords": [
+    "Ed-Tech",
+    "Quiz"
+  ],
+  "author": "Arkaraj",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.18",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "socket.io": "^3.1.2"
+  }
+}
