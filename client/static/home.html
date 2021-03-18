@@ -1,0 +1,76 @@
+<link href="https://fonts.googleapis.com/css?family=Mitr|Roboto+Slab|Source+Sans+Pro&display=swap" rel="stylesheet">
+<script src="https://premium-tailwindcomponents.netlify.app/assets/build/js/main.js?id=8c11b7cf78ebea1b5aed"></script>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="bg-indigo-900 relative overflow-hidden">
+    <div class="inset-0 bg-black opacity-25 absolute"></div>
+    <header class="absolute top-0 left-0 right-0 z-20">
+        <nav class="container mx-auto px-6 md:px-12 py-4" x-data="{ open: false }">
+            <div class="md:flex justify-between items-center">
+                <div class="flex justify-between items-center">
+                    <a href="#" class="text-white">
+                        <!-- This will be the Kubiko Logo -->
+                        <svg class="w-6 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg" data-name="Capa 1"
+                            viewBox="0 0 16.16 12.57">
+                            <defs />
+                            <path d="M14.02 4.77v7.8H9.33V8.8h-2.5v3.77H2.14v-7.8h11.88z" />
+                            <path d="M16.16 5.82H0L8.08 0l8.08 5.82z" />
+                        </svg>
+                    </a>
+
+                    <div class="md:hidden">
+                        <button @click="open = !open" class="text-white focus:outline-none">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path x-show="open === false" d="M4 6H20M4 12H20M4 18H20" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path x-show="open === true" d="M6 18L18 6M6 6L18 18" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center">
+                    <a class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">About us</a>
+                    <a href="login.html"
+                        class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Login</a>
+                    <a href="register.html"
+                        class="text-sm uppercase mx-3 text-white cursor-pointer hover:text-indigo-600">Register</a>
+                </div>
+            </div>
+
+            <div x-show="open === true"
+                class="md:hidden flex flex-col w-full z-40 bg-indigo-600 rounded mt-4 py-2 overflow-hidden">
+                <a class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">About us</a>
+                <a href="login.html"
+                    class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Login</a>
+                <a href="register.html"
+                    class="font-mitr text-sm uppercase text-gray-200 py-2 px-2 hover:bg-indigo-500">Register</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-24 xl:py-40">
+        <div class="lg:w-3/5 xl:w-2/5 flex flex-col items-start relative z-10">
+            <span class="font-mitr uppercase text-indigo-500">Kubiko | Quiz | Polls</span>
+
+            <h1 class="font-roboto-slab text-4xl sm:text-6xl text-red-400 leading-tight mt-4">Taking Tests <br> to the
+                moon</h1>
+
+            <div class="max-w-md">
+                <p class="font-source-sans-pro text-indigo-500 mt-6 text-lg">
+                    Easy Monitoring and creation of Quizes and Live polls, Maintain your scores and progress now with
+                    ease.
+                </p>
+            </div>
+
+            <a href="login.html"
+                class="block bg-indigo-500 hover:bg-indigo-400 py-2 px-4 rounded-full text-sm font-mitr text-white uppercase mt-10">Get
+                started</a>
+        </div>
+
+        <img src="bg.svg" class="hidden sm:block absolute bottom-0 right-0 -mr-40 lg:mr-0" alt="background">
+    </div>
+
+    <img src="stuff.svg" class="absolute left-0 bottom-0 w-full h-full" alt="clouds">
+</div>
