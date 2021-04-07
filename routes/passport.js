@@ -1,5 +1,6 @@
 const passport = require('passport');
 const JWTStrategy = require('passport-jwt').Strategy
+const Users = require('../models/User');
 
 const cookieExtractor = req => {
     let token = null
@@ -14,7 +15,7 @@ passport.use(new JWTStrategy({
     jwtFromRequest: cookieExtractor,
     secretOrKey: `${process.env.SECRET}`
 }, (payload, done) => {
-    /*Users.findById(payload.sub, (err, user) => {
+    Users.findById(payload.sub, (err, user) => {
         if (err) {
             return done(err, false)
         }
@@ -23,5 +24,5 @@ passport.use(new JWTStrategy({
         }
         else
             done(null, false)
-    })*/
+    })
 }))

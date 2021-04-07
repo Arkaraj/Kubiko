@@ -16,6 +16,10 @@ Education is a constitutional right of every citizen that prepares an individual
 
 ## To run it
 
+Make a .env file, inside .env file:
+
+SECRET=*Any secret word*
+
 ```sh
 $ npm i
 ```
@@ -23,5 +27,78 @@ $ npm i
 For Development purpose, install nodemon
 
 ```sh
+$ npm i -D nodemon
+```
+
+```sh
 $ npm start
 ```
+Server side development is completed and it runs on port 8000
+
+# Running Client Side
+
+```
+$ cd client
+
+$ npm install or npm i
+
+npm start
+```
+
+REACT will run locally on port 3000
+
+Client side is not made completely, and has discrete pages for now
+
+
+### To Run it (Recommend)
+
+As server side is completly done, applications like Postman can be used to test and run the server endpoints, and it is recommended by us, as the user interface is not yet fully made.
+
+Enjoy!
+
+## Things That Got Done
+
+## Completed Server Side
+
+### Routes
+
+- [x] POST /user/login Logins student/teacher
+- [x] POST /user/register Registers as student/teacher
+- [x] GET /user/logout Logs out the user
+- [x] GET /user/c/isAuthenticated checks if the user is authenticated or not (**Important**)
+
+### STUDENTS
+
+- [x] GET /students/course Get all courses for a pirticular student (req.user)
+- [x] POST /students/join Join course with course code 
+- [x] GET /students/quiz/:courseId Show Quizzes in the Course room
+- [x] DELETE /students/course/:courseId leave the course
+- [x] POST /students/quiz/:quizId submit the quiz (**Important**)
+- [x] POST /students/marks/:quizId POST the results of the quiz to the backend from REACT
+- [x] GET /students/class/overall/:courseId Gets overall marks of all attempted quizzes in till now
+
+### TEACHERS
+
+- [x] POST /teachers/course creates Course room
+- [x] GET /teachers/course gets all created course
+- [x] GET /teachers/students/:courseId Gets all student in the course
+- [x] GET /teachers/student/overall/:userId/:CourseId Gets overall marks of the student
+- [x] POST /teachers/createQuiz/:courseId creates a new quiz (**Important**)
+- [x] POST /teachers/question creates a new Question
+- [x] DELETE /teachers/:courseId Deletes the course for all student
+
+## Client Side
+
+- [x] Context
+- [x] Authorization Services
+
+#### Pages and components
+
+- [x] Landing page
+- [] NavBar (on authentication state change part is left)
+- [x] Login Page
+- [x] Register Page
+- [] Student dashboard (static for now)
+- [] Quiz creator (static for now)
+- [] Quiz attempt (static for now)
+
