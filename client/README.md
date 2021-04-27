@@ -4,7 +4,7 @@
 
 - [] Home Page
 - [] Nav Bar
-- [] Student DashBoard
+- [x] Student DashBoard
 - [] Teacher DashBoard
 - [] Class Room View
 - [] Quiz Setup Page

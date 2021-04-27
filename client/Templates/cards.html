@@ -14,6 +14,74 @@
       grid-column-gap: 1.2rem;
     }
 
+    .parallel {
+      padding: 0.2rem 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    #forp {
+      position: absolute;
+      display: flex; /*If display is none it won't show us*/
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 0;
+      z-index: 1;
+      background: #fff;
+      opacity: 0;
+      transition: 0.6s;
+    }
+
+    #forp:target {
+      height: 100%;
+      opacity: 1;
+    }
+
+    .close {
+      position: absolute;
+      right: 1.5rem;
+      top: 0.5rem;
+      font-size: 2rem;
+      font-weight: 900;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .joinForm {
+      position: relative;
+      width: 70%;
+      height: 50%;
+      margin: auto;
+      background-color: white;
+      border-radius: 10px;
+      top: 20%;
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.05),
+        5px 5px 15px rgba(0, 0, 0, 0.2);
+      overflow-x: auto;
+      overflow: auto;
+      text-align: center;
+      z-index: 5;
+    }
+
+    .eventCode {
+      width: 40%;
+      border: none;
+      border-bottom: solid black 1px;
+      margin: auto;
+      margin-bottom: 6vh;
+      display: block;
+      padding: 10px;
+      font-size: 1.2rem;
+      outline: none;
+    }
+
     .card {
       background: #fff;
       border-radius: 0.5rem;
@@ -22,6 +90,36 @@
       margin: 1rem;
       position: relative;
       width: 300px;
+    }
+
+    .joinBtn {
+      padding: 1rem 2rem;
+      font-size: 18px;
+      background-color: #ffbc00;
+      display: inline-block;
+      border: 1px solid #ffbc00;
+      margin: 0;
+      border-radius: 0.4rem;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      font-weight: 600;
+      line-height: 1.5;
+      text-transform: none;
+      white-space: normal;
+      word-wrap: break-word;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+
+    .joinBtn a {
+      text-decoration: none;
+      color: #272727;
+    }
+
+    .joinBtn:hover {
+      background: #ffcb33;
+      border-color: #ffcb33;
     }
 
     .card-1 {
@@ -57,17 +155,18 @@
       font-weight: bolder;
     }
 
-    .joinBtn {
+    .enterBtn {
       border: none;
       background: gold;
       padding: 10px 20px;
       display: inline-block;
       text-align: center;
+      font-size: 1rem;
       cursor: pointer;
       margin: 4px 2px;
       border-radius: 1rem;
     }
-    .joinBtn:hover {
+    .enterBtn:hover {
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
         0 10px 10px rgba(0, 0, 0, 0.22);
     }
@@ -75,7 +174,21 @@
 </head>
 
 <body>
-  <h1>Your Courses are:</h1>
+  <div class="parallel">
+    <h2>Welcome Arkaraj, Your Courses are:</h2>
+    <button class="joinBtn"><a href="#forp">Join Room +</a></button>
+  </div>
+
+  <div id="forp">
+    <form class="joinForm">
+      <a href="#" class="close">&times;</a>
+      <h1>Enter the authentication code</h1>
+      <input type="text" class="eventCode" placeholder="Enter the Auth code" />
+      <button class="joinBtn">Join</button>
+      <div class="active-actions"></div>
+    </form>
+  </div>
+
   <div class="course">
     <div class="card card-1">
       <div class="cardContent">
@@ -90,7 +203,7 @@
         <p>This Course is cool.</p>
         <div class="cardbottom">
           <p class="code">Code: cUxHxD</p>
-          <button class="joinBtn">Enter →</button>
+          <button class="enterBtn">View →</button>
         </div>
       </div>
     </div>
