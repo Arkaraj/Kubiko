@@ -40,7 +40,7 @@ export default {
   },
   // Sync backend and front end
   isAuthenticated: async () => {
-    const res = await fetch("/user/c/authenticated");
+    const res = await fetch("/user/c/isAuthenticated");
     if (res.status !== 401) return res.json().then((data) => data);
     else return { isAuthenticated: false, user: {} };
   },

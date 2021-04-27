@@ -14,7 +14,7 @@ export default ({ children }) => {
   useEffect(() => {
     AuthService.isAuthenticated().then((data) => {
       setUser(data.user);
-      setRole(data.user.role);
+      // setRole(data.user.role);
       setIsAuthenticated(data.isAuthenticated);
       setIsLoaded(true);
     });

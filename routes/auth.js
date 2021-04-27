@@ -42,11 +42,9 @@ router.post("/register", async (req, res) => {
             .status(500)
             .json({ message: { msg: "Error has occured", msgError: true } });
         } else
-          res
-            .status(201)
-            .json({
-              message: { msg: "Account successfully created", msgError: false },
-            });
+          res.status(201).json({
+            message: { msg: "Account successfully created", msgError: false },
+          });
       });
     }
   });
@@ -72,11 +70,9 @@ router.post("/login", (req, res) => {
       bcrypt.compare(password, user.password, function (err, validate) {
         if (err) {
           //console.log('Error ' + err)
-          res
-            .status(500)
-            .json({
-              message: { msg: "Error has occured in bcrypt", msgError: true },
-            });
+          res.status(500).json({
+            message: { msg: "Error has occured in bcrypt", msgError: true },
+          });
         }
         if (!validate) {
           res
@@ -87,13 +83,11 @@ router.post("/login", (req, res) => {
           const token = signToken(user._id);
           // httpOnly doen't let client side js touch the cookie saves from cross scripting attacks
           res.cookie("access_token", token, { httpOnly: true, sameSite: true });
-          res
-            .status(200)
-            .json({
-              user,
-              isAuthenticated: true,
-              message: { msgError: false },
-            });
+          res.status(200).json({
+            user,
+            isAuthenticated: true,
+            message: { msgError: false },
+          });
         }
       });
     }
@@ -112,9 +106,7 @@ router.get(
 
 // Main route
 router.get("/c/isAuthenticated", (req, res) => {
-  res
-    .status(200)
-    .json({ isAuthenticated: true, user: req.user, role: req.user.role });
+  res.status(200).json({ isAuthenticated: true, user: req.user });
 });
 
 module.exports = router;

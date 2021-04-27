@@ -1,0 +1,98 @@
+<head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+    body {
+      background: #e2e1e0;
+      font-family: "Open Sans", sans-serif;
+    }
+
+    .course {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 1rem;
+      grid-row-gap: 1rem;
+      grid-column-gap: 1.2rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 0.5rem;
+      display: inline-block;
+      height: fit-content;
+      margin: 1rem;
+      position: relative;
+      width: 300px;
+    }
+
+    .card-1 {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background-image: linear-gradient(20deg, #9cf4ba 50%, #6fed9a 50%);
+    }
+
+    .card-1:hover {
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    .cardContent {
+      position: relative;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quizImage {
+      margin: 0 auto;
+    }
+
+    .cardbottom {
+      display: flex;
+      margin-top: 2rem;
+      justify-content: space-between;
+    }
+
+    .code {
+      color: #333;
+      font-weight: bolder;
+    }
+
+    .joinBtn {
+      border: none;
+      background: gold;
+      padding: 10px 20px;
+      display: inline-block;
+      text-align: center;
+      cursor: pointer;
+      margin: 4px 2px;
+      border-radius: 1rem;
+    }
+    .joinBtn:hover {
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Your Courses are:</h1>
+  <div class="course">
+    <div class="card card-1">
+      <div class="cardContent">
+        <img
+          class="quizImage"
+          src="./quiz.png"
+          alt="Kubiko"
+          width="128"
+          height="128"
+        />
+        <h1 class="cardHeading">Course Name</h1>
+        <p>This Course is cool.</p>
+        <div class="cardbottom">
+          <p class="code">Code: cUxHxD</p>
+          <button class="joinBtn">Enter →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
