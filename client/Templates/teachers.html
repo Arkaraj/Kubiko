@@ -21,7 +21,7 @@
       align-items: baseline;
     }
 
-    #join {
+    #create {
       position: absolute;
       display: flex; /*If display is none it won't show us*/
       justify-content: center;
@@ -36,7 +36,7 @@
       transition: 0.6s;
     }
 
-    #join:target {
+    #create:target {
       height: 100%;
       opacity: 1;
     }
@@ -155,6 +155,10 @@
       font-weight: bolder;
     }
 
+    .Createcode {
+      color: #ffcb33;
+    }
+
     .enterBtn {
       border: none;
       background: gold;
@@ -175,17 +179,23 @@
 
 <body>
   <div class="parallel">
-    <h2>Welcome Arkaraj, Your Courses are:</h2>
-    <button class="joinBtn"><a href="#join">Join Room +</a></button>
+    <h2>Your Created Courses are:</h2>
+    <button class="joinBtn"><a href="#create">Create Course +</a></button>
   </div>
 
-  <div id="join">
+  <div id="create">
     <form class="joinForm">
       <a href="#" class="close">&times;</a>
-      <h1>Enter the authentication code</h1>
+      <h1>Enter the Course Name</h1>
       <input type="text" class="eventCode" placeholder="Enter the Auth code" />
-      <button class="joinBtn">Join</button>
+      <h1>Enter the Course Description</h1>
+      <input type="text" class="eventCode" placeholder="Enter the Auth code" />
+      <button class="joinBtn">Create</button>
       <div class="active-actions"></div>
+      <h3>
+        Your Course Room is Created!, Course Code:
+        <span class="Createcode">cUxHxD</span>
+      </h3>
     </form>
   </div>
 

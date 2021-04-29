@@ -2,12 +2,12 @@
 
 ## To-Do
 
-- [] Home Page
-- [] Nav Bar
+- [x] Home Page
+- [] Nav Bar <almost done>
 - [x] Student DashBoard
-- [] Teacher DashBoard
+- [x] Teacher DashBoard
 - [] Class Room View
-- [] Quiz Setup Page
-- [] Quiz Page
+- [x] Quiz Setup Page
+- [x] Quiz Page
 - [] Poll Setup Page
-- [] Poll page
+- [] Poll page (react polls, npm i react-polls)
