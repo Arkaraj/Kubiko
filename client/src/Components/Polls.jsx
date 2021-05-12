@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Poll from "@gidesan/react-polls";
 
 const Polls = () => {
-  const pollQuestion = "Is react-polls useful?";
+  const pollQuestion = "How was the Exam?";
   const pollAnswers = [
-    { option: "Yes", votes: 8 },
-    { option: "No", votes: 2 },
+    { option: "Good", votes: 8 },
+    { option: "Bad", votes: 2 },
   ];
 
   const [pollAnswer, setPollAnswer] = useState([...pollAnswers]);
@@ -21,15 +21,15 @@ const Polls = () => {
   };
 
   return (
-    <div>
+    <div className="poll">
       <Poll
         customStyles={{
           questionSeparator: false,
           questionSeparatorWidth: "question",
           questionBold: false,
-          questionColor: "#4F70D6",
+          questionColor: "#ff8f07",
           align: "center",
-          theme: "blue",
+          theme: "cyan",
         }}
         noStorage={true}
         question={pollQuestion}
