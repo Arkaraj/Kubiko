@@ -37,7 +37,7 @@ const Teacher = () => {
         </form>
       </div>
       <div className="course">
-        <div className="card card-1">
+        <div className="cardx card-1">
           <div className="cardContent">
             <img
               className="quizImage"
@@ -60,7 +60,7 @@ const Teacher = () => {
             </div>
           </div>
         </div>
-        <div className="card card-1">
+        <div className="cardx card-1">
           <div className="cardContent">
             <img
               className="quizImage"

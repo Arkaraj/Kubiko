@@ -3672,14 +3672,14 @@ body {
   outline: none;
 }
 
-.card {
+.cardx {
   background: #fff;
   border-radius: 0.5rem;
   display: inline-block;
   height: fit-content;
   margin: 1rem;
   position: relative;
-  width: 300px;
+  /* width: 300px; */
 }
 
 .joinBtn {
@@ -3688,6 +3688,7 @@ body {
   background-color: #ffbc00;
   display: inline-block;
   border: 1px solid #ffbc00;
+  color: #272727;
   margin: 0;
   border-radius: 0.4rem;
   -webkit-box-shadow: none;
@@ -3776,4 +3777,21 @@ body {
 #create:target {
   height: 100%;
   opacity: 1;
+}
+
+/* Horizontal Card CSS Starts  */
+.horizontal-card-bg-img {
+  width: 180px;
+  border-radius: 1rem;
+  background: #f5f9fb;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.horizontal-card-btn-container {
+  width: 140px;
+}
+/* Horizontal Card CSS Ends */
+.move {
+  margin-left: 85%;
 }
