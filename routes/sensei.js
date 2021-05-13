@@ -17,7 +17,10 @@ router.post("/course", async (req, res) => {
   };
 
   const course = await (await Course.create(courseModel)).save();
-  res.send({ course });
+  res.send({
+    course,
+    msg: `Your Course Room is Created!, Course Code: ${course.code}`,
+  });
 });
 
 router.get("/course", async (req, res) => {

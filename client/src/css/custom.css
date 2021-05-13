@@ -3795,3 +3795,9 @@ body {
 .move {
   margin-left: 85%;
 }
+
+.trashx {
+  color: var(--secondary);
+  width: fit-content;
+  cursor: pointer;
+}

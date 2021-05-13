@@ -12,6 +12,7 @@ const passport = require("passport");
 const passportConfig = require("./routes/passport");
 const isSensei = require("./middlewares/isSensei");
 const isStudent = require("./middlewares/isStudent");
+const Course = require("./models/Course");
 
 mongoose.connect(
   `mongodb://localhost/QuizHack`,
@@ -38,6 +39,23 @@ app.use(
   isSensei,
   sensei
 );
+
+// try {
+//   const course = new Course({
+//     name: "Operating Systems",
+//     description: "This course is about OS",
+//     creator: ["60558f67807375dd230820d8"],
+//   });
+
+//   course.save((err) => {
+//     if (err) throw err;
+//     else {
+//       console.log("Done");
+//     }
+//   });
+// } catch (err) {
+//   console.log(err);
+// }
 
 const port = process.env.PORT || 5000;
 

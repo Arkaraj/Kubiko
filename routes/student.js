@@ -45,7 +45,11 @@ router.post("/join", async (req, res) => {
           user.courses.push(course._id);
           user.save();
 
-          res.send({ user });
+          res.send({
+            course,
+            msg: `Joined Room ${course.name}`,
+            msgError: false,
+          });
         }
       }
     }
