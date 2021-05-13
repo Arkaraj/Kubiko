@@ -9,7 +9,13 @@ const router = express.Router();
 // Get all courses for a pirticular student
 router.get("/course", async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate("courses");
+    const user = await User.findById(req.user._id).populate({
+      path: "courses",
+      populate: {
+        path: "creator",
+      },
+    });
+
     res.send({ courses: user.courses });
   } catch (err) {
     // Not right way to handle error
@@ -71,16 +77,6 @@ router.delete("/course/:courseId", async (req, res) => {
   course.save();
 
   res.send({ user });
-});
-
-// Show Quizzes in the Course room
-router.get("/quiz/:courseId", async (req, res) => {
-  // This will be an array
-  const quizzes = await Quiz.find({ courseId: req.params.courseId }).populate(
-    "questions"
-  );
-
-  res.send({ quizzes });
 });
 
 // Students can write quizzes

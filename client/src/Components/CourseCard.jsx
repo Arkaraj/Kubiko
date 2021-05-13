@@ -29,7 +29,15 @@ const CourseCard = ({ course, setCourses, teacher }) => {
         <p>{course.description}</p>
         <div class="cardbottom">
           <p class="code">Code: {course.code}</p>
-          <Link to={`/course`} style={{ color: "black" }}>
+          <Link
+            to={{
+              pathname: `/course/${course._id}`,
+              state: {
+                course,
+              },
+            }}
+            style={{ color: "black" }}
+          >
             <button class="enterBtn">View →</button>
           </Link>
         </div>

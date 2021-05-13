@@ -71,7 +71,10 @@ const Navbar = (props) => {
                           Login/Register
                         </Link>
                       ) : (
-                        <Link className="nav-link" to="/student">
+                        <Link
+                          className="nav-link"
+                          to={user.role === "student" ? "/student" : "/teacher"}
+                        >
                           {user.name}
                         </Link>
                       )}

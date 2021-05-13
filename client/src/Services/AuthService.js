@@ -38,6 +38,26 @@ export default {
     const data = await res.json();
     return data;
   },
+  ShowQuizzes: async (_courseId) => {
+    const res = await fetch(`/user/quiz/${_courseId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    return data;
+  },
+  getCourse: async (_courseId) => {
+    const res = await fetch(`/user/course/${_courseId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    return data.course;
+  },
   // Sync backend and front end
   isAuthenticated: async () => {
     const res = await fetch("/user/c/isAuthenticated");

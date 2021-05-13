@@ -30,14 +30,16 @@ router.get("/course", async (req, res) => {
 });
 
 // Gets all student in the course
-router.get("/students", async (req, res) => {
-  const courseModel = await Course.find({ creator: req.user._id });
+router.get("/students/:courseId", async (req, res) => {
+  const courseModel = await Course.findById(req.params.courseId).populate(
+    "students"
+  );
 
-  const [course] = courseModel.map((c) => c.students);
+  // const [course] = courseModel.map((c) => c.students);
   // course is an array of student _ids
 
   // res.send({ course });
-  res.send({ students: course });
+  res.send({ students: courseModel.students });
 });
 
 router.delete("/:courseId", async (req, res) => {

@@ -28,16 +28,6 @@ export default {
     const data = await res.json();
     return data;
   },
-  ShowQuizzes: async (_courseId) => {
-    const res = await fetch(`/students/quiz/${_courseId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    return data;
-  },
   // Sync backend and front end
   overallMarks: async (_courseId) => {
     const res = await fetch(`/students/class/overall/${_courseId}`);

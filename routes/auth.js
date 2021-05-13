@@ -5,6 +5,8 @@ const JWT = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const passportConfig = require("./passport");
+const Quiz = require("../models/Quiz");
+const Course = require("../models/Course");
 
 const signToken = (id) => {
   return JWT.sign(
@@ -103,6 +105,29 @@ router.get(
     res.status(200).json({ msg: "Logged out", user: {}, success: true });
   }
 );
+
+// General Route
+// Show Quizzes in the Course room
+router.get("/quiz/:courseId", async (req, res) => {
+  // This will be an array
+  try {
+    const quizzes = await Quiz.find({ courseId: req.params.courseId }).populate(
+      "questions"
+    );
+
+    res.send({ quizzes });
+  } catch (err) {
+    throw err;
+    res.status(404).json();
+  }
+});
+
+// Get the Course
+router.get("/course/:courseId", async (req, res) => {
+  const course = await Course.findById(req.params.courseId).populate("creator");
+
+  res.send({ course });
+});
 
 // Main route
 router.get(
