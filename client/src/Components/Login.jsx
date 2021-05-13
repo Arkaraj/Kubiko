@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import loginImage from "../images/login.svg";
+import { Link } from "react-router-dom";
+import AuthService from "../Services/AuthService";
+import { AuthContext } from "../Context/AuthContext";
 
-const Login = () => {
+const Login = (props) => {
+  const [user, setUser] = useState({ email: "", password: "" });
+  const authContext = useContext(AuthContext);
+
+  const onChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    AuthService.login(user).then((data) => {
+      const { user, isAuthenticated } = data;
+
+      authContext.setUser(user);
+      authContext.setIsAuthenticated(isAuthenticated);
+      authContext.setRole(user.role);
+      if (user.role === "student") {
+        props.history.push("./student");
+      } else {
+        props.history.push("./teacher");
+      }
+    });
+  };
+
   return (
     <div className="clouds min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
       <div
@@ -19,58 +46,65 @@ const Login = () => {
               </h1>
               <p>Welcome Back User</p>
             </div>
-            <div>
-              <div className="flex -mx-3">
-                <div className="w-full px-3 mb-5">
-                  <label htmlFor className="text-xs font-semibold px-1">
-                    Email
-                  </label>
-                  <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                      <i className="mdi mdi-email-outline text-gray-400 text-lg" />
+            <form onSubmit={handleSubmit}>
+              <div>
+                <div className="flex -mx-3">
+                  <div className="w-full px-3 mb-5">
+                    <label className="text-xs font-semibold px-1">Email</label>
+                    <div className="flex">
+                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                        <i className="mdi mdi-email-outline text-gray-400 text-lg" />
+                      </div>
+                      <input
+                        type="email"
+                        name="email"
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-yellow-500"
+                        value={user.email}
+                        onChange={onChange}
+                        placeholder="arkaraj@test.com"
+                      />
                     </div>
-                    <input
-                      type="email"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-yellow-500"
-                      placeholder="arkaraj@test.com"
-                    />
                   </div>
                 </div>
-              </div>
-              <div className="flex -mx-3">
-                <div className="w-full px-3 mb-7">
-                  <label htmlFor className="text-xs font-semibold px-1">
-                    Password
-                  </label>
-                  <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                      <i className="mdi mdi-lock-outline text-gray-400 text-lg" />
+                <div className="flex -mx-3">
+                  <div className="w-full px-3 mb-7">
+                    <label htmlFor className="text-xs font-semibold px-1">
+                      Password
+                    </label>
+                    <div className="flex">
+                      <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                        <i className="mdi mdi-lock-outline text-gray-400 text-lg" />
+                      </div>
+                      <input
+                        type="password"
+                        name="password"
+                        value={user.password}
+                        className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-yellow-500"
+                        onChange={onChange}
+                        placeholder="************"
+                      />
                     </div>
-                    <input
-                      type="password"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-yellow-500"
-                      placeholder="************"
-                    />
+                  </div>
+                </div>
+                <div className="flex -mx-3">
+                  <div className="w-full px-3 mb-5">
+                    <button className="block w-full max-w-xs mx-auto bg-yellow-500 hover:bg-yellow-700 focus:bg-yellow-700 text-white rounded-lg px-3 py-3 font-semibold capitalize">
+                      Login
+                    </button>
+                    <div className="text-center mt-2">
+                      Don't have an account?{" "}
+                      <Link
+                        to="/register"
+                        className="text-yellow-500 underline cursor-pointer"
+                        style={{ color: "#F59E0B" }}
+                      >
+                        Register
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="flex -mx-3">
-                <div className="w-full px-3 mb-5">
-                  <button className="block w-full max-w-xs mx-auto bg-yellow-500 hover:bg-yellow-700 focus:bg-yellow-700 text-white rounded-lg px-3 py-3 font-semibold capitalize">
-                    Login
-                  </button>
-                  <div className="text-center mt-2">
-                    Don't have an account?
-                    <a
-                      href="register.html"
-                      className="text-yellow-500 underline cursor-pointer"
-                    >
-                      Register
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -7,8 +7,15 @@ const User = require("../models/User");
 const router = express.Router();
 
 // Get all courses for a pirticular student
-router.get("/course", (req, res) => {
-  res.send({ courses: req.user.courses });
+router.get("/course", async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).populate("courses");
+    res.send({ courses: user.courses });
+  } catch (err) {
+    // Not right way to handle error
+    console.log(err);
+    res.status(500).json({});
+  }
 });
 
 router.post("/join", async (req, res) => {

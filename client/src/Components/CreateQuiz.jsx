@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import "../css/createQuiz.css";
+// import "../css/createQuiz.css";
 
 const CreateQuiz = () => {
   return (

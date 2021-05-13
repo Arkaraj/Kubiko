@@ -2,23 +2,29 @@ import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 
-const PrivateRoutes = ({ component: Component, ...rest }) => {
+const StudentRoutes = ({ component: Component, ...rest }) => {
   const { role, isAuthenticated } = useContext(AuthContext);
 
   return (
     <Route
       {...rest}
       render={(props) => {
-        // eslint-disable-next-line eqeqeq
-        if (isAuthenticated && role == "student") {
+        if (!isAuthenticated) {
           return (
-            <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+            <Redirect
+              to={{ pathname: "/login", state: { from: props.location } }}
+            />
           );
-        }
+        } else if (isAuthenticated && role !== "student")
+          return (
+            <Redirect
+              to={{ pathname: "/teacher", state: { from: props.location } }}
+            />
+          );
         return <Component {...props} />;
       }}
     />
   );
 };
 
-export default PrivateRoutes;
+export default StudentRoutes;

@@ -105,8 +105,12 @@ router.get(
 );
 
 // Main route
-router.get("/c/isAuthenticated", (req, res) => {
-  res.status(200).json({ isAuthenticated: true, user: req.user });
-});
+router.get(
+  "/c/isAuthenticated",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.status(200).json({ isAuthenticated: true, user: req.user });
+  }
+);
 
 module.exports = router;

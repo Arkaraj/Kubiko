@@ -1,12 +1,25 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import quizImage from "../images/quiz.png";
+import React, { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import CourseCard from "./CourseCard";
+import StudentService from "../Services/StudentService";
 
 const Student = () => {
+  const { user } = useContext(AuthContext);
+
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    StudentService.getAllRooms().then((data) => {
+      console.log(data);
+      setCourses(data.courses);
+    });
+  }, []);
+
   return (
     <div class="content">
       <div class="parallel">
-        <h2>Welcome Arkaraj, Your Courses are:</h2>
+        <h2>Welcome {user.name}, Your Courses are:</h2>
         <a href="#join">
           <button class="joinBtn">Join Room +</button>
         </a>
@@ -29,172 +42,13 @@ const Student = () => {
       </div>
 
       <div class="course">
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">Software Engineering</h1>
-            <p>
-              Software engineering is a branch of computer science which
-              includes the development and building of computer systems software
-              and applications software. Computer systems software is composed
-              of programs that include computing utilities and operations
-              systems.
-            </p>
-            <div class="cardbottom">
-              <p class="code">Code: cUxHxD</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">Operating Systems</h1>
-            <p>
-              Software engineering is a branch of computer science which
-              includes the development and building of computer systems software
-              and applications software. Computer systems software is composed
-              of programs that include computing utilities and operations
-              systems.
-            </p>
-            <div class="cardbottom">
-              <p class="code">Code: pX_yqY</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">DBMS</h1>
-            <p>
-              Software engineering is a branch of computer science which
-              includes the development and building of computer systems software
-              and applications software. Computer systems software is composed
-              of programs that include computing utilities and operations
-              systems.
-            </p>
-            <div class="cardbottom">
-              <p class="code">Code: YpB6J_</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">Course Name</h1>
-            <p>
-              Software engineering is a branch of computer science which
-              includes the development and building of computer systems software
-              and applications software. Computer systems software is composed
-              of programs that include computing utilities and operations
-              systems.
-            </p>
-            <div class="cardbottom">
-              <p class="code">Code: xYz7Fe</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">Course Name</h1>
-            <p>This Course is cool.</p>
-            <div class="cardbottom">
-              <p class="code">Code: cUxHxD</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">Course Name</h1>
-            <p>This Course is cool.</p>
-            <div class="cardbottom">
-              <p class="code">Code: cUxHxD</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">Software Engineering</h1>
-            <p>
-              Software engineering is a branch of computer science which
-              includes the development and building of computer systems software
-              and applications software. Computer systems software is composed
-              of programs that include computing utilities and operations
-              systems.
-            </p>
-            <div class="cardbottom">
-              <p class="code">Code: cUxHxD</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
-        <div class="card card-1">
-          <div class="cardContent">
-            <img
-              class="quizImage"
-              src={quizImage}
-              alt="Kubiko"
-              width="128"
-              height="128"
-            />
-            <h1 class="cardHeading">Course Name</h1>
-            <p>This Course is cool.</p>
-            <div class="cardbottom">
-              <p class="code">Code: cUxHxD</p>
-              <button class="enterBtn">View →</button>
-            </div>
-          </div>
-        </div>
+        {courses.length > 0 ? (
+          courses.map((course) => (
+            <CourseCard key={Math.random()} course={course} />
+          ))
+        ) : (
+          <h2>No Courses</h2>
+        )}
       </div>
     </div>
   );

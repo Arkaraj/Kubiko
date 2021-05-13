@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import iconImage from "../images/logo-icon.png";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
+import AuthService from "../Services/AuthService";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { user, setUser, setIsAuthenticated, isAuthenticated } = useContext(
+    AuthContext
+  );
+
+  const logoutUser = () => {
+    AuthService.logout().then((data) => {
+      if (data.success) {
+        setUser(data.user);
+        setIsAuthenticated(false);
+      }
+    });
+  };
+
   return (
     <>
       <header className="w3l-header">
@@ -10,9 +26,9 @@ const Navbar = () => {
             <div className="container">
               <nav className="navbar navbar-expand-lg navbar-light py-md-2 py-0 px-0">
                 <img src={iconImage} alt="" />
-                <a className="navbar-brand" href="index.html">
+                <Link className="navbar-brand" to="/">
                   Kubiko
-                </a>
+                </Link>
                 {/* if logo is image enable this   
 				<a class="navbar-brand" href="#index.html">
 						<img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -35,25 +51,43 @@ const Navbar = () => {
                 >
                   <ul className="navbar-nav ml-auto">
                     <li className="nav-item active">
-                      <a className="nav-link" href="index.html">
+                      <Link className="nav-link" to="/">
                         Home <span className="sr-only">(current)</span>
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item @@about-active">
-                      <a className="nav-link" href="about.html">
+                      <Link className="nav-link" to="/">
                         About
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item @@services-active">
-                      <a className="nav-link" href="services.html">
+                      <Link className="nav-link" to="/">
                         Services
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item @@contact-active">
-                      <a className="nav-link" href="contact.html">
-                        Login/Register
-                      </a>
+                      {!isAuthenticated ? (
+                        <Link className="nav-link" to="/login">
+                          Login/Register
+                        </Link>
+                      ) : (
+                        <Link className="nav-link" to="/student">
+                          {user.name}
+                        </Link>
+                      )}
                     </li>
+                    {isAuthenticated ? (
+                      <li className="nav-item @@services-active">
+                        <button
+                          onClick={logoutUser}
+                          style={{ color: "beige" }}
+                          type="button"
+                          className="nav-link btn btn-danger"
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    ) : null}
                   </ul>
                 </div>
               </nav>
