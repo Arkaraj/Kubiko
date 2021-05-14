@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import GeneralService from "../Services/AuthService";
 import StudentService from "../Services/StudentService";
+import BreadCrum from "./BreadCrum";
 
 const Course = (props) => {
   const id = props.match.params.courseId;
   let crs = null;
-  let course = props.location.state.course ? props.location.state.course : crs;
+  let course = props.location.state ? props.location.state.course : crs;
   const [quizzes, setQuizzes] = useState([]);
   const [polls, setPolls] = useState([]);
 
@@ -22,6 +23,8 @@ const Course = (props) => {
     GeneralService.ShowQuizzes(id).then((data) => {
       console.log(data);
       setQuizzes(data.quizzes);
+      // Will delete later
+      setPolls([1, 2, 3]);
     });
     if (!course) {
       GeneralService.getCourse(id).then((data) => {
@@ -46,107 +49,153 @@ const Course = (props) => {
   };
 
   return (
-    <div className="container">
-      <div className="pll">
-        <h1>{course.name}</h1>
+    <>
+      <BreadCrum path={["Course", `${course.name}`]} />
+      <div className="container" style={{ background: "#eee" }}>
+        <div className="pll">
+          <h1>{course.name}</h1>
+          {user.role === "student" ? (
+            <Link onClick={leaveRoom}>
+              <button className="btn btn-danger">Leave the Room</button>
+            </Link>
+          ) : null}
+        </div>
         {user.role === "student" ? (
-          <Link onClick={leaveRoom}>
-            <button className="btn btn-danger">Leave the Room</button>
-          </Link>
-        ) : null}
-      </div>
-      <h4>Faculty: {names}</h4>
-      {course.message ? (
-        <>
-          <h2>Room Message:</h2>
-          <p>{course.message}</p>
-        </>
-      ) : (
-        <>
-          <h2>Room Message:</h2>
-          <p>Nothing</p>
-        </>
-      )}
-      <div className="row">
-        <div className="move">
-          {user.role === "teacher" ? (
-            <>
-              <Link
-                to={{
-                  pathname: `./${course._id}/students`,
-                  state: { course },
-                }}
-              >
-                <button className="btn btn-primary d-flex justify-content-end">
-                  All Students
-                </button>
-              </Link>
-            </>
-          ) : (
-            <button className="btn btn-primary d-flex justify-content-end">
-              <Link to={`/student`} style={{ color: "black" }}>
-                Result/Performance
-              </Link>
-            </button>
-          )}
-        </div>
-        <div className="col-lg-12">
-          <h2>Quizzes</h2>
-          <hr />
-          {/* Horizontal Card One */}
-          {quizzes.length > 0 ? (
-            quizzes.map((quiz) => (
-              <div className="card border-0 mb-4 mt-4">
-                <div className="d-flex rounded">
-                  <img src={quizImage} className="horizontal-card-bg-img" />
-                  <div className="flex-fill">
-                    <div className="card-body">
-                      <div className="font-weight-bold mt-3">{quiz.title}</div>
-                      <div className="mb-3">{quiz.description}</div>
-                      <div className="mb-3">Timing: 4 - 4:15</div>
-                    </div>
-                  </div>
-                  <div className="horizontal-card-btn-container d-flex justify-content-center align-items-center">
-                    <button className="btn btn-warning">Attempt</button>
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <h3>No Quizzes assigned yet</h3>
-          )}
-          {/* Horizontal Card One Ends*/}
-          <br />
-
-          <h2>Polls</h2>
-          <hr />
-          {polls.length > 0 ? (
-            polls.map((poll) => (
-              <div className="card border-0 mb-4">
-                <div className="d-flex">
-                  <img src={pollImage} className="horizontal-card-bg-img" />
-                  <div className="flex-fill">
-                    <div className="card-body">
-                      <div className="font-weight-bold mt-3">
-                        How was your Exam?
+          <h4>Faculty: {names}</h4>
+        ) : (
+          <h4>You are the Admin of this Course</h4>
+        )}
+        {course.message ? (
+          <>
+            <h2>Room Message:</h2>
+            <p>{course.message}</p>
+          </>
+        ) : (
+          <>
+            <h2>Room Message:</h2>
+            <p>Nothing</p>
+          </>
+        )}
+        <div className="row">
+          <div className="move">
+            {user.role === "teacher" ? (
+              <>
+                <Link
+                  to={{
+                    pathname: `./${course._id}/students`,
+                    state: { course },
+                  }}
+                >
+                  <button className="btn btn-primary d-flex justify-content-end">
+                    All Students
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <button className="btn btn-primary d-flex justify-content-end">
+                <Link to={`/student`} style={{ color: "black" }}>
+                  Result/Performance
+                </Link>
+              </button>
+            )}
+          </div>
+          <div className="col-lg-12">
+            <div className="d-flex flex-row justify-content-between">
+              <h2>Quizzes</h2>
+              {user.role === "teacher" ? (
+                <Link to={`/createQuiz/${course._id}`}>
+                  <button className="btn btn-primary d-flex justify-content-end align-items-center">
+                    Add new Quiz <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                </Link>
+              ) : null}
+            </div>
+            <hr />
+            {/* Horizontal Card One */}
+            {quizzes.length > 0 ? (
+              quizzes.map((quiz) => (
+                <div className="card border-0 mb-4 mt-4">
+                  <div className="d-flex rounded">
+                    <img src={quizImage} className="horizontal-card-bg-img" />
+                    <div className="flex-fill">
+                      <div className="card-body">
+                        <div className="font-weight-bold mt-3">
+                          {quiz.title}
+                        </div>
+                        <div className="mb-3">{quiz.description}</div>
+                        <div className="mb-3">Timing: 4 - 4:15</div>
                       </div>
-                      <div className="mb-3">This is a Poll</div>
-                      <div className="mb-3">Timing: 3 - 3:45pm</div>
+                    </div>
+                    <div
+                      className="horizontal-card-btn-container d-flex
+                  flex-col justify-content-around align-items-center"
+                    >
+                      {user.role === "student" ? (
+                        <Link to={`/quiz/${quiz._id}`}>
+                          <button className="btn btn-warning">Attempt</button>
+                        </Link>
+                      ) : (
+                        <>
+                          <Link>
+                            <button className="btn btn-warning">
+                              Edit <i class="fas fa-edit"></i>
+                            </button>
+                          </Link>
+                          <Link>
+                            <button className="btn btn-warning">
+                              View results
+                            </button>
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
-                  <div className="horizontal-card-btn-container d-flex justify-content-center align-items-center">
-                    <button className="btn btn-warning">Give Poll</button>
+                </div>
+              ))
+            ) : (
+              <h3>No Quizzes assigned yet</h3>
+            )}
+            {/* Horizontal Card One Ends*/}
+            <br />
+            <div className="d-flex flex-row justify-content-between">
+              <h2>Polls</h2>
+              {user.role === "teacher" ? (
+                <Link to={`/createPoll/${course._id}`}>
+                  <button className="btn btn-primary d-flex justify-content-end align-items-center">
+                    Add new Poll <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                </Link>
+              ) : null}
+            </div>
+            <hr />
+            {polls.length > 0 ? (
+              polls.map((poll) => (
+                <div className="card border-0 mb-4">
+                  <div className="d-flex">
+                    <img src={pollImage} className="horizontal-card-bg-img" />
+                    <div className="flex-fill">
+                      <div className="card-body">
+                        <div className="font-weight-bold mt-3">
+                          How was your Exam?
+                        </div>
+                        <div className="mb-3">This is a Poll</div>
+                        <div className="mb-3">Timing: 3 - 3:45pm</div>
+                      </div>
+                    </div>
+                    <div className="horizontal-card-btn-container d-flex justify-content-center align-items-center">
+                      <button className="btn btn-warning">Give Poll</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          ) : (
-            <h3>No Polls Assigned yet</h3>
-          )}
-          <br />
+              ))
+            ) : (
+              <h3>No Polls Assigned yet</h3>
+            )}
+            <br />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

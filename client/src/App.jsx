@@ -13,6 +13,7 @@ import Student from "./Components/Student";
 import Teacher from "./Components/Teacher";
 import SenseiRoutes from "./Hocs/SenseiRoute";
 import StudentRoutes from "./Hocs/StudentRoute";
+import PublicRoute from "./Hocs/PublicRoute";
 import ShowStudents from "./Components/ShowStudents";
 
 const App = () => {
@@ -22,12 +23,16 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
+          <PublicRoute path="/login" exact component={Login} />
+          <PublicRoute path="/register" exact component={Register} />
           <StudentRoutes path="/student" exact component={Student} />
           <SenseiRoutes path="/teacher" exact component={Teacher} />
-          <SenseiRoutes path="/createQuiz" exact component={CreateQuiz} />
-          <StudentRoutes path="/quiz" exact component={Quiz} />
+          <SenseiRoutes
+            path="/createQuiz/:courseId"
+            exact
+            component={CreateQuiz}
+          />
+          <StudentRoutes path="/quiz/:quizId" exact component={Quiz} />
           <StudentRoutes path="/polls" exact component={Polls} />
         </Switch>
         <Route path="/course/:courseId" exact component={Course} />

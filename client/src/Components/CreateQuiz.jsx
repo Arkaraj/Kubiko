@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-// import "../css/createQuiz.css";
+import "../css/createQuiz.css";
+import { BsCircle } from "react-icons/bs";
 
 const CreateQuiz = () => {
   return (
-    <div style={{ textAlign: "center", background: "#ced4da" }}>
+    <div style={{ textAlign: "center", background: "#ced4da", height: "100%" }}>
       <div className="page-border border-left" />
       <div className="page-border border-right" />
       <div className="page-border border-top" />
@@ -17,7 +18,7 @@ const CreateQuiz = () => {
           style={{ marginBottom: "16px" }}
         >
           <h3 style={{ paddingTop: "0px", marginBottom: "20px" }}>
-            Quiz Maker
+            Create Quiz
           </h3>
           <div className="wrapper">
             <input
@@ -28,7 +29,7 @@ const CreateQuiz = () => {
               type="text"
               required
             />
-            <span className="underline" />
+            <span className="underlinex" />
           </div>
           <div className="wrapper">
             <input
@@ -38,7 +39,7 @@ const CreateQuiz = () => {
               type="text"
               style={{ fontSize: "12px" }}
             />
-            <span className="underline" />
+            <span className="underlinex" />
           </div>
           <div className="card" name="qset1">
             <div className="card-body">
@@ -51,10 +52,10 @@ const CreateQuiz = () => {
                   style={{ fontSize: "18px" }}
                   required
                 />
-                <span className="underline" />
+                <span className="underlinex" />
               </div>
               <label className="input-container" style={{ width: "100%" }}>
-                <i className="fa fa-circle-o icon" />
+                <BsCircle className="icon" />
                 <input
                   type="text"
                   id="q1opt1"
@@ -64,7 +65,7 @@ const CreateQuiz = () => {
                 />
               </label>
               <label className="input-container" style={{ width: "100%" }}>
-                <i className="fa fa-circle-o icon" />
+                <BsCircle className="icon" />
                 <input
                   type="text"
                   id="q1opt2"
@@ -74,7 +75,7 @@ const CreateQuiz = () => {
                 />
               </label>
               <label className="input-container" style={{ width: "100%" }}>
-                <i className="fa fa-circle-o icon" />
+                <BsCircle className="icon" />
                 <input
                   type="text"
                   id="q1opt3"
@@ -84,7 +85,7 @@ const CreateQuiz = () => {
                 />
               </label>
               <label className="input-container" style={{ width: "100%" }}>
-                <i className="fa fa-circle-o icon" />
+                <BsCircle className="icon" />
                 <input
                   type="text"
                   id="q1opt4"
@@ -120,7 +121,7 @@ const CreateQuiz = () => {
                 data-placement="bottom"
                 title="Delete question"
               >
-                <i className="fa fa-trash fa-2x" />
+                <i className="fa fa-trash fa-2x trashx" />
               </span>
             </div>
           </div>
@@ -134,6 +135,7 @@ const CreateQuiz = () => {
           DONE
         </button>
       </form>
+      <sub>Kubiko</sub>
     </div>
   );
 };

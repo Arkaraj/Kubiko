@@ -1,10 +1,14 @@
 import React from "react";
+import BreadCrum from "./BreadCrum";
 
 const Home = () => {
   return (
-    <div>
-      <h2>Home Page</h2>
-    </div>
+    <>
+      <BreadCrum path={[]} />
+      <div>
+        <h2>Home Page</h2>
+      </div>
+    </>
   );
 };
 

@@ -118,7 +118,6 @@ router.get("/quiz/:courseId", async (req, res) => {
     res.send({ quizzes });
   } catch (err) {
     throw err;
-    res.status(404).json();
   }
 });
 
