@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const PollSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  title: { type: String, required: true },
   courseId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Course",

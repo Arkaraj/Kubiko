@@ -24,7 +24,7 @@ const Course = (props) => {
       console.log(data);
       setQuizzes(data.quizzes);
       // Will delete later
-      setPolls([1, 2, 3]);
+      setPolls([]);
     });
     if (!course) {
       GeneralService.getCourse(id).then((data) => {
@@ -187,8 +187,32 @@ const Course = (props) => {
                         <div className="mb-3">Timing: 3 - 3:45pm</div>
                       </div>
                     </div>
-                    <div className="horizontal-card-btn-container d-flex justify-content-center align-items-center">
-                      <button className="btn btn-warning">Give Poll</button>
+                    <div
+                      className="horizontal-card-btn-container d-flex
+                  flex-col justify-content-around align-items-center"
+                    >
+                      {user.role === "student" ? (
+                        <Link to={`/poll/}`}>
+                          <button className="btn btn-warning">Give Poll</button>
+                        </Link>
+                      ) : (
+                        <>
+                          <Link
+                            to={{
+                              pathname: `/editPoll/`,
+                            }}
+                          >
+                            <button className="btn btn-warning">
+                              Edit <i class="fas fa-edit"></i>
+                            </button>
+                          </Link>
+                          <Link>
+                            <button className="btn btn-warning">
+                              View results
+                            </button>
+                          </Link>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "../css/createQuiz.css";
 import SenseiService from "../Services/SenseiService";
-import Question from "./Question";
+import { BsCircle } from "react-icons/bs";
 
 const CreateQuiz = (props) => {
   const id = props.match.params.courseId;
@@ -10,7 +10,18 @@ const CreateQuiz = (props) => {
   const [quiz, setQuiz] = useState({ title: "", description: "" });
   const [quizInfo, setQuizInfo] = useState(null);
   const [quizCreated, setQuizCreated] = useState(false);
-  const [totalQuestions, setTotalQuestions] = useState([1]);
+  const [questions, setQuestions] = useState([
+    {
+      question: "",
+      marks: 1,
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      answer: "",
+    },
+  ]);
+  const [done, setDone] = useState(false);
 
   const onChange = (e) => {
     setQuiz({ ...quiz, [e.target.name]: e.target.value });
@@ -26,14 +37,170 @@ const CreateQuiz = (props) => {
     });
   };
 
+  const postQuestion = (e, question) => {
+    e.preventDefault();
+    SenseiService.createQuestion(question, quizInfo._id).then((data) => {
+      console.log(data);
+      setDone(true);
+    });
+  };
+
   const addNewQuestion = (e) => {
     // Append random no
     e.preventDefault();
-    setTotalQuestions((q) => [
-      ...q,
-      Math.random().toString(36).substring(2, 7),
-    ]);
+    let newOptions = JSON.parse(JSON.stringify(questions));
+    newOptions.push({
+      question: "",
+      marks: 1,
+      option1: "",
+      option2: "",
+      option3: "",
+      option4: "",
+      answer: "",
+    });
+    // setQuestions((q) => [...q, Math.random().toString(36).substring(2, 7)]);
+    setQuestions([...newOptions]);
   };
+
+  const onChangeQuestion = (e, indx) => {
+    e.preventDefault();
+    let newOptions = JSON.parse(JSON.stringify(questions));
+    newOptions[indx][e.target.name] = e.target.value;
+    setQuestions([...newOptions]);
+  };
+
+  const removeQuestion = () => {
+    let newOptions = JSON.parse(JSON.stringify(questions));
+    newOptions.pop();
+    setQuestions([...newOptions]);
+  };
+
+  const QuestionJSX = () => (
+    <>
+      {questions.map((question, indx) => (
+        <form
+          className="card"
+          id="form"
+          onSubmit={(e) => postQuestion(e, question)}
+        >
+          <div className="card-body">
+            <div className="wrapper">
+              <input
+                className="input"
+                id="q1"
+                name="question"
+                value={questions[indx].question}
+                onChange={(e) => onChangeQuestion(e, indx)}
+                placeholder="Untitled Question*"
+                type="text"
+                style={{ fontSize: "18px" }}
+                required
+              />
+              <span className="underlinex" />
+            </div>
+            <label className="input-container" style={{ width: "100%" }}>
+              <BsCircle className="icon" />
+              <input
+                type="text"
+                id="q1opt1"
+                name="option1"
+                value={questions[indx].option1}
+                onChange={(e) => onChangeQuestion(e, indx)}
+                className="form-control"
+                placeholder="Option 1"
+                required
+              />
+            </label>
+            <label className="input-container" style={{ width: "100%" }}>
+              <BsCircle className="icon" />
+              <input
+                type="text"
+                id="q1opt2"
+                name="option2"
+                value={questions[indx].option2}
+                onChange={(e) => onChangeQuestion(e, indx)}
+                className="form-control"
+                placeholder="Option 2"
+                required
+              />
+            </label>
+            <label className="input-container" style={{ width: "100%" }}>
+              <BsCircle className="icon" />
+              <input
+                type="text"
+                id="q1opt3"
+                name="option3"
+                value={questions[indx].option3}
+                onChange={(e) => onChangeQuestion(e, indx)}
+                className="form-control"
+                placeholder="Option 3"
+                required
+              />
+            </label>
+            <label className="input-container" style={{ width: "100%" }}>
+              <BsCircle className="icon" />
+              <input
+                type="text"
+                id="q1opt4"
+                name="option4"
+                value={questions[indx].option4}
+                onChange={(e) => onChangeQuestion(e, indx)}
+                className="form-control"
+                placeholder="Option 4"
+                required
+              />
+            </label>
+            <label className="input-container" style={{ width: "100%" }}>
+              <i className="fa fa-check-circle icon" />
+              <input
+                type="text"
+                id="q1ans"
+                name="answer"
+                value={questions[indx].answer}
+                onChange={(e) => onChangeQuestion(e, indx)}
+                className="form-control"
+                placeholder="Answer"
+                required
+              />
+            </label>
+            <label className="input-container" style={{ width: "100%" }}>
+              <i className="fa fa-check-circle icon" />
+              <input
+                type="number"
+                // id="q1ans"
+                min="1"
+                name="marks"
+                value={questions[indx].marks}
+                onChange={(e) => onChangeQuestion(e, indx)}
+                className="form-control"
+                placeholder="Marks"
+                required
+              />
+            </label>
+          </div>
+          <div className="card-footer" align="right">
+            <span
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Delete question"
+              onClick={removeQuestion}
+            >
+              <i className="fa fa-trash fa-2x trashx" />
+            </span>
+          </div>
+          <button
+            name="submit_btn"
+            value="primary"
+            type="submit"
+            className="btn-get-started"
+            disabled={done}
+          >
+            DONE
+          </button>
+        </form>
+      ))}
+    </>
+  );
 
   return (
     <div style={{ textAlign: "center", background: "#ced4da", height: "100%" }}>
@@ -101,13 +268,7 @@ const CreateQuiz = (props) => {
       {quizCreated ? (
         <>
           <h3>Questions: </h3>
-          {totalQuestions.map((ques) => (
-            <Question
-              key={Math.random()}
-              setTotalQuestions={setTotalQuestions}
-              quiz={quizInfo}
-            />
-          ))}
+          <QuestionJSX />
         </>
       ) : null}
 
