@@ -11,8 +11,8 @@ export default {
     const data = await res.json();
     return data;
   },
-  createQuestion: async (question) => {
-    const res = await fetch("/teachers/question", {
+  createQuestion: async (question, quizId) => {
+    const res = await fetch(`/teachers/question/${quizId}`, {
       method: "POST",
       body: JSON.stringify(question),
       headers: {
@@ -38,7 +38,16 @@ export default {
     const data = await res.json();
     return data;
   },
-  // Sync backend and front end
+  GetQuiz: async (_id) => {
+    const res = await fetch(`/teachers/quiz/${_id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    return data;
+  },
   overallMarks: async (_userId, _courseId) => {
     const res = await fetch(
       `/teachers/student/overall/${_userId}/${_courseId}`

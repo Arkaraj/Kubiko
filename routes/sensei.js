@@ -64,6 +64,17 @@ router.post("/createQuiz/:courseId", async (req, res) => {
   res.send({ quiz });
 });
 
+// Show Teacher the Quiz
+router.get("/quiz/:quizId", async (req, res) => {
+  try {
+    const quiz = await Quiz.findById(req.params.quizId).populate("questions");
+
+    res.json({ quiz });
+  } catch (err) {
+    throw err;
+  }
+});
+
 // Teacher will add question here
 router.post("/question/:quizId", async (req, res) => {
   const question = await (await Question.create(req.body)).save();

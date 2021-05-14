@@ -15,6 +15,7 @@ import SenseiRoutes from "./Hocs/SenseiRoute";
 import StudentRoutes from "./Hocs/StudentRoute";
 import PublicRoute from "./Hocs/PublicRoute";
 import ShowStudents from "./Components/ShowStudents";
+import EditQuiz from "./Components/EditQuiz";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             exact
             component={CreateQuiz}
           />
+          <SenseiRoutes path="/editQuiz/:quizId" exact component={EditQuiz} />
           <StudentRoutes path="/quiz/:quizId" exact component={Quiz} />
           <StudentRoutes path="/polls" exact component={Polls} />
         </Switch>

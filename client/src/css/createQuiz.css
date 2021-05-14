@@ -107,23 +107,6 @@ input:focus::-webkit-input-placeholder {
   font-weight: 500;
   font-size: 16px;
   font-weight: 600;
-  border-color: #18d26e;
-  border-width: 1px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 8px 32px;
-  border-radius: 50px;
-  transition: 0.5s;
-  margin: 10px;
-  color: #fff;
-  background: #18d26e;
-}
-
-#form .btn-get-started {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  font-weight: 600;
   border-color: var(--primary);
   border-width: 1px;
   letter-spacing: 1px;
@@ -143,6 +126,13 @@ input:focus::-webkit-input-placeholder {
 #form .btn-get-started:hover {
   background: #fff;
   color: var(--primary);
+}
+
+#form .btn-get-started:disabled {
+  border-color: #333;
+  background: #333;
+  color: #fff;
+  cursor: not-allowed;
 }
 
 #form .form-control {

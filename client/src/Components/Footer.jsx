@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,10 +9,10 @@ const Footer = () => {
         <div className="container pb-lg-3">
           <div className="row footer-top-29">
             <div className="col-lg-4 col-md-6 footer-list-29 footer-1 mt-md-4">
-              <a className="footer-logo mb-md-3 mb-2" href="#url">
+              <Link className="footer-logo mb-md-3 mb-2" to="/">
                 <img src="assets/images/logo-icon.png" alt="" />
                 Kubiko
-              </a>
+              </Link>
               <p>
                 We amplify important ideas in mathematics education to help
                 teachers grow their practice and our profession. Lorem ipsum

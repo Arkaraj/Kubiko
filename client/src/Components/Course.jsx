@@ -136,7 +136,12 @@ const Course = (props) => {
                         </Link>
                       ) : (
                         <>
-                          <Link>
+                          <Link
+                            to={{
+                              pathname: `/editQuiz/${quiz._id}`,
+                              state: { quiz },
+                            }}
+                          >
                             <button className="btn btn-warning">
                               Edit <i class="fas fa-edit"></i>
                             </button>
