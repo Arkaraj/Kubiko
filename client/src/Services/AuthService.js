@@ -38,8 +38,8 @@ export default {
     const data = await res.json();
     return data;
   },
-  ShowQuizzes: async (_courseId) => {
-    const res = await fetch(`/user/quiz/${_courseId}`, {
+  ShowQuizzesAndPolls: async (_courseId) => {
+    const res = await fetch(`/user/quiz_polls/${_courseId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

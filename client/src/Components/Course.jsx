@@ -20,11 +20,10 @@ const Course = (props) => {
   let names = course.creator.map((instructor) => instructor.name).join();
 
   useEffect(() => {
-    GeneralService.ShowQuizzes(id).then((data) => {
-      console.log(data);
+    GeneralService.ShowQuizzesAndPolls(id).then((data) => {
+      // console.log(data);
       setQuizzes(data.quizzes);
-      // Will delete later
-      setPolls([]);
+      setPolls(data.polls);
     });
     if (!course) {
       GeneralService.getCourse(id).then((data) => {
@@ -87,7 +86,7 @@ const Course = (props) => {
                   }}
                 >
                   <button className="btn btn-primary d-flex justify-content-end">
-                    All Students
+                    View All Students
                   </button>
                 </Link>
               </>
@@ -181,9 +180,9 @@ const Course = (props) => {
                     <div className="flex-fill">
                       <div className="card-body">
                         <div className="font-weight-bold mt-3">
-                          How was your Exam?
+                          {poll.question}
                         </div>
-                        <div className="mb-3">This is a Poll</div>
+                        <div className="mb-3">{poll.title}</div>
                         <div className="mb-3">Timing: 3 - 3:45pm</div>
                       </div>
                     </div>
@@ -192,14 +191,14 @@ const Course = (props) => {
                   flex-col justify-content-around align-items-center"
                     >
                       {user.role === "student" ? (
-                        <Link to={`/poll/}`}>
+                        <Link to={`/poll/${poll._id}}`}>
                           <button className="btn btn-warning">Give Poll</button>
                         </Link>
                       ) : (
                         <>
                           <Link
                             to={{
-                              pathname: `/editPoll/`,
+                              pathname: `/editPoll/${poll._id}`,
                             }}
                           >
                             <button className="btn btn-warning">

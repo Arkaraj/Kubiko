@@ -7,6 +7,7 @@ const passport = require("passport");
 const passportConfig = require("./passport");
 const Quiz = require("../models/Quiz");
 const Course = require("../models/Course");
+const Poll = require("../models/Poll");
 
 const signToken = (id) => {
   return JWT.sign(
@@ -108,14 +109,17 @@ router.get(
 
 // General Route
 // Show Quizzes in the Course room
-router.get("/quiz/:courseId", async (req, res) => {
+router.get("/quiz_polls/:courseId", async (req, res) => {
   // This will be an array
   try {
     const quizzes = await Quiz.find({ courseId: req.params.courseId }).populate(
       "questions"
     );
+    const polls = await Poll.find({ courseId: req.params.courseId }).populate(
+      "options"
+    );
 
-    res.send({ quizzes });
+    res.send({ quizzes, polls });
   } catch (err) {
     throw err;
   }

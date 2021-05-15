@@ -1,9 +1,11 @@
 const express = require("express");
 const Course = require("../models/Course");
 const { default: Performance } = require("../models/Performance");
+const Poll = require("../models/Poll");
 const Question = require("../models/Question");
 const Quiz = require("../models/Quiz");
 const User = require("../models/User");
+const Option = require("../models/Option");
 const router = express.Router();
 
 // creates Course room
@@ -86,6 +88,55 @@ router.post("/question/:quizId", async (req, res) => {
   await quiz.save();
 
   res.send({ quiz });
+});
+
+router.get("/student/overall/:userId/:CourseId", async (req, res) => {
+  const performance = await Performance.findOne({
+    UserId: req.params.userId,
+    CourseId: req.params.courseId,
+  });
+
+  // totalmarks = sum of all quizes results/(total no. of quiz) => decimal
+
+  res.send({ performance: performance.totalmarks });
+});
+
+// Create the Poll
+router.post("/poll/:courseId", async (req, res) => {
+  const { title, question } = req.body;
+
+  const pollModel = {
+    title,
+    question,
+    courseId: req.params.courseId,
+  };
+
+  const poll = await (await Poll.create(pollModel)).save();
+
+  res.send({ poll });
+});
+
+router.post("/option/:pollId", async (req, res) => {
+  const option = await (await Option.create(req.body)).save();
+
+  const poll = await Poll.findById(req.params.pollId);
+
+  poll.options.push(option._id);
+
+  await poll.save();
+
+  res.send({ poll });
+});
+
+// Show Teacher the Poll
+router.get("/poll/:pollId", async (req, res) => {
+  try {
+    const poll = await Poll.findById(req.params.pollId).populate("options");
+
+    res.json({ poll });
+  } catch (err) {
+    throw err;
+  }
 });
 
 router.get("/student/overall/:userId/:CourseId", async (req, res) => {

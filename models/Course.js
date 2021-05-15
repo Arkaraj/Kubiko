@@ -8,6 +8,7 @@ const CourseSchema = new mongoose.Schema({
   creator: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   students: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   quiz: [{ type: mongoose.Schema.Types.ObjectId, ref: "Quiz" }],
+  poll: [{ type: mongoose.Schema.Types.ObjectId, ref: "Poll" }],
   message: { type: String, default: "" },
   performance: [{ type: mongoose.Schema.Types.ObjectId, ref: "Performance" }],
 });

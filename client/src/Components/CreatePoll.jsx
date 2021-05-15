@@ -1,28 +1,31 @@
 import React, { useState, useRef } from "react";
 import SenseiService from "../Services/SenseiService";
-import StudentService from "../Services/StudentService";
+import { Link } from "react-router-dom";
 
-const CreatePoll = () => {
+const CreatePoll = (props) => {
+  const id = props.match.params.courseId;
+
   const [title, setTitle] = useState("");
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState([
     {
-      text: "",
+      option: "",
     },
     {
-      text: "",
+      option: "",
     },
   ]);
   const [pollCreated, setPollCreated] = useState(false);
+  const [pollInfo, setPollInfo] = useState(false);
 
   const inputRef = useRef(null);
 
   const handleOptionInput = (e, i) => {
     e.preventDefault();
     let newOptions = JSON.parse(JSON.stringify(options));
-    newOptions[i].text = e.target.value;
+    newOptions[i].option = e.target.value;
     setOptions(newOptions);
-    inputRef.current.focus();
+    // inputRef.current.focus();
   };
 
   const handleTitleInput = (e) => {
@@ -30,7 +33,7 @@ const CreatePoll = () => {
   };
   const addInputs = () => {
     let newOptions = JSON.parse(JSON.stringify(options));
-    newOptions.push({ text: "" });
+    newOptions.push({ option: "" });
     setOptions([...newOptions]);
   };
 
@@ -47,13 +50,19 @@ const CreatePoll = () => {
       title,
       question,
     };
-    alert(JSON.stringify(poll, null, 4));
-    setPollCreated(true);
-    // StudentService
+    // alert(JSON.stringify(poll, null, 4));
+    SenseiService.createPoll(poll, id).then((data) => {
+      setPollInfo(data);
+      setPollCreated(true);
+    });
   };
 
-  const submitPoll = (e) => {
+  const submitPoll = (e, option) => {
     e.preventDefault();
+    inputRef.current.disabled = true;
+    SenseiService.createOption(option, pollInfo._id).then((data) => {
+      console.log(data);
+    });
   };
 
   const AddPoll = () => (
@@ -63,15 +72,23 @@ const CreatePoll = () => {
           <div className="form-group">
             <label htmlFor={"Input" + (i + 1)}>{"Poll Item " + (i + 1)}</label>
             <input
-              ref={inputRef}
               key={i}
               className="form-control input-lg"
               id={"Input" + (i + 1)}
               type="text"
               name="text"
-              value={options[i].text}
+              value={options[i].option}
               onChange={(e) => handleOptionInput(e, i)}
               placeholder={"Poll Item " + (i + 1)}
+            />
+
+            <input
+              ref={inputRef}
+              type="button"
+              className="btn btn-success pull-right"
+              value="Submit Poll"
+              disabled={false}
+              onClick={(e) => submitPoll(e, input)}
             />
           </div>
         );
@@ -102,14 +119,15 @@ const CreatePoll = () => {
         {pollCreated ? (
           <AddPoll />
         ) : (
-          <input
-            type="button"
-            className="btn btn-success pull-right"
-            value="Create Poll"
-            onClick={postPoll}
-          />
+          <>
+            <input
+              type="button"
+              className="btn btn-success pull-right"
+              value="Create Poll"
+              onClick={postPoll}
+            />
+          </>
         )}
-        <label>{"Adjust Number of Options"}</label>
         <br />
         {pollCreated ? (
           <>
@@ -125,12 +143,11 @@ const CreatePoll = () => {
               value="-"
               onClick={removeInputs}
             />
-            <input
-              type="button"
-              className="btn btn-success pull-right"
-              value="Submit Poll"
-              onClick={submitPoll}
-            />
+            <label>{"Adjust Number of Options"}</label>
+
+            <Link onClick={props.history.goBack}>
+              <button>Done</button>
+            </Link>
           </>
         ) : null}
       </form>

@@ -7,8 +7,8 @@ const PollSchema = new mongoose.Schema({
     ref: "Course",
     required: true,
   },
-  question: { type: String, max: 50, required: true },
-  options: { type: mongoose.Types.ObjectId, ref: "Option" },
+  question: { type: String, required: true },
+  options: [{ type: mongoose.Types.ObjectId, ref: "Option" }],
   available: { type: Boolean, default: true },
 });
 

@@ -17,6 +17,7 @@ import PublicRoute from "./Hocs/PublicRoute";
 import ShowStudents from "./Components/ShowStudents";
 import EditQuiz from "./Components/EditQuiz";
 import CreatePoll from "./Components/CreatePoll";
+import EditPoll from "./Components/EditPoll";
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
             component={CreatePoll}
           />
           <SenseiRoutes path="/editQuiz/:quizId" exact component={EditQuiz} />
+          <SenseiRoutes path="/editPoll/:pollId" exact component={EditPoll} />
           <StudentRoutes path="/quiz/:quizId" exact component={Quiz} />
           <StudentRoutes path="/polls/:pollsId" exact component={Polls} />
         </Switch>
