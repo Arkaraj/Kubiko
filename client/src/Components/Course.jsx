@@ -130,9 +130,24 @@ const Course = (props) => {
                   flex-col justify-content-around align-items-center"
                     >
                       {user.role === "student" ? (
-                        <Link to={`/quiz/${quiz._id}`}>
-                          <button className="btn btn-warning">Attempt</button>
-                        </Link>
+                        <>
+                          {quiz.available ? (
+                            <Link
+                              to={{
+                                pathname: `/quiz/${quiz._id}`,
+                                state: { quiz },
+                              }}
+                            >
+                              <button className="btn btn-warning">
+                                Attempt
+                              </button>
+                            </Link>
+                          ) : (
+                            <button className="btn btn-warning">
+                              View Marks
+                            </button>
+                          )}
+                        </>
                       ) : (
                         <>
                           <Link
@@ -191,9 +206,24 @@ const Course = (props) => {
                   flex-col justify-content-around align-items-center"
                     >
                       {user.role === "student" ? (
-                        <Link to={`/poll/${poll._id}}`}>
-                          <button className="btn btn-warning">Give Poll</button>
-                        </Link>
+                        <>
+                          {poll.available ? (
+                            <Link
+                              to={{
+                                pathname: `/poll/${poll._id}`,
+                                state: { poll },
+                              }}
+                            >
+                              <button className="btn btn-warning">
+                                Give Poll
+                              </button>
+                            </Link>
+                          ) : (
+                            <button className="btn btn-warning">
+                              View Results
+                            </button>
+                          )}
+                        </>
                       ) : (
                         <>
                           <Link

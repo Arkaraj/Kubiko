@@ -80,10 +80,11 @@ router.delete("/course/:courseId", async (req, res) => {
 });
 
 // Students can write quizzes
+// Work required
 router.post("/quiz/:quizId", async (req, res) => {
   const { option } = req.body;
 
-  Quiz.findById({ _id: req.params.quizId })
+  Quiz.findById(req.params.quizId)
     .populate("questions")
     .exec((err, document) => {
       if (err) res.send({ msgError: true });

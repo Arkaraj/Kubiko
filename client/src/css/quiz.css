@@ -366,9 +366,9 @@ label .glyphicon {
   }
 }
 
-.btn-primary:active,
+/* .btn-primary:active,
 .btn-primary:focus,
 .btn-primary:hover,
 .btn-primary::selection {
   background-color: #8064a2 !important;
-}
+} */

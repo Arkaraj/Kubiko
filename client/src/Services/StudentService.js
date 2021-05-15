@@ -28,7 +28,6 @@ export default {
     const data = await res.json();
     return data;
   },
-  // Sync backend and front end
   overallMarks: async (_courseId) => {
     const res = await fetch(`/students/class/overall/${_courseId}`);
     if (res.status !== 401) return res.json().then((data) => data);

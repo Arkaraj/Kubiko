@@ -70,6 +70,26 @@ export default {
     const data = await res.json();
     return data;
   },
+  updateQuiz: async (_id) => {
+    const res = await fetch(`/teachers/quiz/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    return data;
+  },
+  updatePoll: async (_id) => {
+    const res = await fetch(`/teachers/poll/${_id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    return data;
+  },
   overallMarks: async (_userId, _courseId) => {
     const res = await fetch(
       `/teachers/student/overall/${_userId}/${_courseId}`

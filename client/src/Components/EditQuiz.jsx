@@ -35,7 +35,10 @@ const EditQuiz = (props) => {
                   <div>
                     <div className="modal-dialog">
                       <div className="modal-content">
-                        <div style={{ padding: "0 1rem" }}>
+                        <div
+                          className="modal-header"
+                          style={{ display: "block", padding: "1rem" }}
+                        >
                           <div className="d-flex justify-content-between align-items-center">
                             <h3>{q.question}</h3>
                             <mark style={{}}>({q.marks} mark)</mark>

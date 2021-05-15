@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "../css/createQuiz.css";
 import SenseiService from "../Services/SenseiService";
 import { BsCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const CreateQuiz = (props) => {
   const id = props.match.params.courseId;
@@ -269,6 +270,9 @@ const CreateQuiz = (props) => {
         <>
           <h3>Questions: </h3>
           <QuestionJSX />
+          <Link onClick={props.history.goBack}>
+            <button className="btn-get-started">Done</button>
+          </Link>
         </>
       ) : null}
 

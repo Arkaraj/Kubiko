@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Poll from "@gidesan/react-polls";
 
-const Polls = () => {
-  const pollQuestion = "How was the Exam?";
-  const pollAnswers = [
-    { option: "Good", votes: 8 },
-    { option: "Bad", votes: 2 },
-  ];
+const Polls = (props) => {
+  const id = props.match.params.pollId;
+
+  const { poll } = props.location.state;
+
+  const pollQuestion = poll.question;
+
+  const pollAnswers = poll.options.map((opt) => {
+    return { option: opt.option, votes: opt.clicked };
+  });
 
   const [pollAnswer, setPollAnswer] = useState([...pollAnswers]);
   const [result, setResult] = useState(null);
@@ -22,6 +26,7 @@ const Polls = () => {
 
   return (
     <div className="poll">
+      <h4>Title: {poll.title}</h4>
       <Poll
         customStyles={{
           questionSeparator: false,

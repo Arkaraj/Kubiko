@@ -139,6 +139,38 @@ router.get("/poll/:pollId", async (req, res) => {
   }
 });
 
+// Freeze Quiz
+router.put("/quiz/:quizId", async (req, res) => {
+  try {
+    const quiz = await Quiz.findByIdAndUpdate(req.params.quizId, {
+      $set: {
+        available: false,
+      },
+    });
+
+    res.status(200).json({ quiz });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// Freeze Poll
+router.put("/poll/:pollId", async (req, res) => {
+  try {
+    const poll = await Poll.findByIdAndUpdate(req.params.pollId, {
+      $set: {
+        available: false,
+      },
+    });
+
+    res.status(200).json({ poll });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.get("/student/overall/:userId/:CourseId", async (req, res) => {
   const performance = await Performance.findOne({
     UserId: req.params.userId,
