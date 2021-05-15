@@ -2,6 +2,8 @@ const express = require("express");
 const Course = require("../models/Course");
 const Performance = require("../models/Performance");
 const Quiz = require("../models/Quiz");
+const Poll = require("../models/Poll");
+const Option = require("../models/Option");
 const Result = require("../models/Result");
 const User = require("../models/User");
 const router = express.Router();
@@ -51,10 +53,22 @@ router.post("/join", async (req, res) => {
           user.courses.push(course._id);
           user.save();
 
-          res.send({
-            course,
-            msg: `Joined Room ${course.name}`,
-            msgError: false,
+          let performanceModel = {
+            UserId: req.user._id,
+            CourseId: course._id,
+          };
+
+          Performance.create(performanceModel, (err, performance) => {
+            if (err) {
+              console.log(err);
+              res.status.apply(500).json({ err, msgError: true });
+            } else {
+              res.send({
+                course,
+                msg: `Joined Room ${course.name}`,
+                msgError: false,
+              });
+            }
           });
         }
       }
@@ -67,14 +81,14 @@ router.post("/join", async (req, res) => {
 
 router.delete("/course/:courseId", async (req, res) => {
   const user = await User.findById(req.user._id);
+  user.courses = user.courses.filter((c) => c != req.params.courseId);
 
-  user.courses.filter((c) => c != req.params.courseId);
-  user.save();
+  await user.save();
 
   const course = await Course.findById(req.params.courseId);
 
   course.students.filter((s) => s != req.user._id);
-  course.save();
+  await course.save();
 
   res.send({ user });
 });
@@ -82,7 +96,7 @@ router.delete("/course/:courseId", async (req, res) => {
 // Students can write quizzes
 // Work required
 router.post("/quiz/:quizId", async (req, res) => {
-  const { option } = req.body;
+  const { quizMarks } = req.body;
 
   Quiz.findById(req.params.quizId)
     .populate("questions")
@@ -97,7 +111,23 @@ router.post("/quiz/:quizId", async (req, res) => {
     });
 });
 
-router.post("/marks/:quizId/:courseId", async (res, req) => {
+// Submit Poll
+router.post("/poll/:optionId", async (req, res) => {
+  try {
+    const option = await Option.findById(req.params.optionId);
+
+    option.clicked += 1;
+
+    await option.save();
+
+    res.json({ option });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.post("/marks/:quizId/:courseId", async (req, res) => {
   const { quizMarks } = req.body;
 
   const resultModel = {
@@ -106,22 +136,35 @@ router.post("/marks/:quizId/:courseId", async (res, req) => {
     quizMarks,
   };
 
-  const result = await (await Result.create(resultModel)).save();
+  try {
+    Result.create(resultModel, async (err, result) => {
+      if (err) {
+        console.log(err);
+        res.json(err);
+      } else {
+        const quiz = await Quiz.findById(req.params.quizId);
 
-  const performance = await Performance.findOne({
-    UserId: req.user._id,
-    CourseId: req.params.courseId,
-  });
+        quiz.results.push(result._id);
+        await quiz.save();
 
-  performance.totalQuiz += 1;
+        const performance = await Performance.findOne({
+          UserId: req.user._id,
+          CourseId: req.params.courseId,
+        });
+        performance.totalQuiz += 1;
 
-  const stats = quizMarks + performance.totalmarks;
+        const stats = quizMarks + performance.totalmarks;
 
-  performance.totalmarks = stats / performance.totalQuiz;
+        performance.totalmarks = stats / performance.totalQuiz;
 
-  await performance.save();
+        await performance.save();
 
-  res.send({ result });
+        res.send({ result });
+      }
+    });
+  } catch (err) {
+    throw err;
+  }
 });
 
 router.get("/class/overall/:courseId", async (req, res) => {

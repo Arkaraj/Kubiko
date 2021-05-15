@@ -21,7 +21,7 @@ const CreatePoll = (props) => {
   const inputRef = useRef(null);
 
   const handleOptionInput = (e, i) => {
-    e.preventDefault();
+    // e.preventDefault();
     let newOptions = JSON.parse(JSON.stringify(options));
     newOptions[i].option = e.target.value;
     setOptions(newOptions);

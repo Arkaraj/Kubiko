@@ -135,7 +135,7 @@ const Course = (props) => {
                             <Link
                               to={{
                                 pathname: `/quiz/${quiz._id}`,
-                                state: { quiz },
+                                state: { quiz, courseId: course._id },
                               }}
                             >
                               <button className="btn btn-warning">

@@ -1,9 +1,6 @@
 import React from "react";
 import BreadCrum from "./BreadCrum";
-import p1 from "../images/p1.jpg";
-import p2 from "../images/p2.jpg";
-import p3 from "../images/p3.jpg";
-import p4 from "../images/p4.jpg";
+import expImage from "../images/expImage";
 
 const Home = () => {
   return (
@@ -67,7 +64,11 @@ const Home = () => {
                   <div className="col-md-12 mt-3">
                     <div className="grids5-info">
                       <a href="#url" className="d-block zoom">
-                        <img src={p1} alt="" className="img-fluid news-image" />
+                        <img
+                          src={expImage.p1}
+                          alt=""
+                          className="img-fluid news-image"
+                        />
                       </a>
                       <div className="blog-info">
                         <p className="date">Step 01</p>
@@ -88,7 +89,11 @@ const Home = () => {
                   <div className="col-md-12 mt-3">
                     <div className="grids5-info">
                       <a href="#url" className="d-block zoom">
-                        <img src={p2} alt="" className="img-fluid news-image" />
+                        <img
+                          src={expImage.p2}
+                          alt=""
+                          className="img-fluid news-image"
+                        />
                       </a>
                       <div className="blog-info">
                         <p className="date">Step 02</p>
@@ -109,7 +114,11 @@ const Home = () => {
                   <div className="col-md-12 mt-3">
                     <div className="grids5-info">
                       <a href="#url" className="d-block zoom">
-                        <img src={p3} alt="" className="img-fluid news-image" />
+                        <img
+                          src={expImage.p3}
+                          alt=""
+                          className="img-fluid news-image"
+                        />
                       </a>
                       <div className="blog-info">
                         <p className="date">Step 03</p>
@@ -130,7 +139,11 @@ const Home = () => {
                   <div className="col-md-12 mt-3">
                     <div className="grids5-info">
                       <a href="#url" className="d-block zoom">
-                        <img src={p4} alt="" className="img-fluid news-image" />
+                        <img
+                          src={expImage.p4}
+                          alt=""
+                          className="img-fluid news-image"
+                        />
                       </a>
                       <div className="blog-info">
                         <p className="date">Step 04</p>
@@ -194,7 +207,7 @@ const Home = () => {
                     <div className="feature-16-gd">
                       <div className="icon">
                         <img
-                          src="../images/seminors.png"
+                          src={expImage.seminors}
                           className="img-fluid"
                           alt=""
                         />
@@ -224,7 +237,7 @@ const Home = () => {
                     <div className="feature-16-gd">
                       <div className="icon">
                         <img
-                          src="../images/course.png"
+                          src={expImage.course}
                           className="img-fluid"
                           alt=""
                         />
@@ -254,7 +267,7 @@ const Home = () => {
                     <div className="feature-16-gd">
                       <div className="icon">
                         <img
-                          src="../images/library.png"
+                          src={expImage.library}
                           className="img-fluid"
                           alt=""
                         />
@@ -284,7 +297,7 @@ const Home = () => {
                     <div className="feature-16-gd">
                       <div className="icon">
                         <img
-                          src="../images/teacher.png"
+                          src={expImage.teacher}
                           className="img-fluid"
                           alt=""
                         />
@@ -356,9 +369,9 @@ const Home = () => {
                       <div className="slider-info mt-lg-4 mt-3">
                         <div className="img-circle">
                           <img
-                            src="../images/student1.jpg"
+                            src={expImage.s1}
                             className="img-fluid testimonial-img"
-                            alt="client image"
+                            alt="client pic"
                           />
                         </div>
                         <div className="message">
@@ -383,9 +396,9 @@ const Home = () => {
                       <div className="slider-info mt-lg-4 mt-3">
                         <div className="img-circle">
                           <img
-                            src="../images/student2.jpg"
+                            src={expImage.s2}
                             className="img-fluid testimonial-img"
-                            alt="client image"
+                            alt="client pic"
                           />
                         </div>
                         <div className="message">
@@ -410,9 +423,9 @@ const Home = () => {
                       <div className="slider-info mt-lg-4 mt-3">
                         <div className="img-circle">
                           <img
-                            src="../images/student3.jpg"
+                            src={expImage.s3}
                             className="img-fluid testimonial-img"
-                            alt="client image"
+                            alt="client pic"
                           />
                         </div>
                         <div className="message">
@@ -437,9 +450,9 @@ const Home = () => {
                       <div className="slider-info mt-lg-4 mt-3">
                         <div className="img-circle">
                           <img
-                            src="../images/student4.jpg"
+                            src={expImage.s4}
                             className="img-fluid testimonial-img"
-                            alt="client image"
+                            alt="client pic"
                           />
                         </div>
                         <div className="message">

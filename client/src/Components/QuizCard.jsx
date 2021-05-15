@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 
-const QuizCard = ({ quiz }) => {
-  const [options, setOptions] = useState([]);
-
-  const onChange = (e) => {};
+const QuizCard = ({ quiz, indx, options, setOptions, answers }) => {
+  const onChange = (e) => {
+    let newOptions = JSON.parse(JSON.stringify(options));
+    newOptions[indx].option = e.target.value;
+    if (e.target.value === answers[indx].answer) {
+      newOptions[indx].marks += answers[indx].marks;
+      setOptions(newOptions);
+    } else {
+      newOptions[indx].marks = 0;
+      setOptions(newOptions);
+    }
+  };
 
   return (
     <div className="modal-dialog">
@@ -18,18 +26,7 @@ const QuizCard = ({ quiz }) => {
           </div>
         </div>
         <div className="modal-body">
-          <div className="col-xs-3 col-xs-offset-5">
-            <div id="loadbar" style={{ display: "none" }}>
-              <div className="blockG" id="rotateG_01" />
-              <div className="blockG" id="rotateG_02" />
-              <div className="blockG" id="rotateG_03" />
-              <div className="blockG" id="rotateG_04" />
-              <div className="blockG" id="rotateG_05" />
-              <div className="blockG" id="rotateG_06" />
-              <div className="blockG" id="rotateG_07" />
-              <div className="blockG" id="rotateG_08" />
-            </div>
-          </div>
+          <div className="col-xs-3 col-xs-offset-5"></div>
           <div className="quiz" id="quiz" data-toggle="buttons">
             <label
               id="counter"
@@ -38,7 +35,12 @@ const QuizCard = ({ quiz }) => {
               <span className="btn-label">
                 <i className="glyphicon glyphicon-chevron-right" />
               </span>
-              <input type="radio" name="qcounter" defaultValue={1} />
+              <input
+                type="radio"
+                onChange={onChange}
+                name="quiz"
+                value={quiz.option1}
+              />
               {quiz.option1}
             </label>
             <label
@@ -48,7 +50,12 @@ const QuizCard = ({ quiz }) => {
               <span className="btn-label">
                 <i className="glyphicon glyphicon-chevron-right" />
               </span>
-              <input type="radio" name="qcounter" defaultValue={2} />
+              <input
+                type="radio"
+                onChange={onChange}
+                name="quiz"
+                value={quiz.option2}
+              />
               {quiz.option2}
             </label>
             <label
@@ -58,7 +65,12 @@ const QuizCard = ({ quiz }) => {
               <span className="btn-label">
                 <i className="glyphicon glyphicon-chevron-right" />
               </span>
-              <input type="radio" name="qcounter" defaultValue={3} />
+              <input
+                type="radio"
+                onChange={onChange}
+                name="quiz"
+                value={quiz.option3}
+              />
               {quiz.option3}
             </label>
             <label
@@ -68,7 +80,12 @@ const QuizCard = ({ quiz }) => {
               <span className="btn-label">
                 <i className="glyphicon glyphicon-chevron-right" />
               </span>
-              <input type="radio" name="qcounter" defaultValue={4} />
+              <input
+                type="radio"
+                onChange={onChange}
+                name="quiz"
+                value={quiz.option4}
+              />
               {quiz.option4}
             </label>
           </div>

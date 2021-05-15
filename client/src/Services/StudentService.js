@@ -23,6 +23,17 @@ export default {
     // We get the user data
     else return {};
   },
+  submitPoll: async (optionId) => {
+    const res = await fetch(`/students/poll/${optionId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.status !== 401) return res.json().then((data) => data.option);
+    // We get the user data
+    else return {};
+  },
   getAllRooms: async () => {
     const res = await fetch("/students/course");
     const data = await res.json();
@@ -41,7 +52,7 @@ export default {
         "Content-Type": "application/json",
       },
     });
-    if (res.status !== 401) return res.json().then((data) => data);
+    if (res.status !== 401) return res.json().then((data) => data.result);
     else return {};
   },
   deleteRoom: async (_courseId) => {
