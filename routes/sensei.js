@@ -1,6 +1,6 @@
 const express = require("express");
 const Course = require("../models/Course");
-const { default: Performance } = require("../models/Performance");
+const Performance = require("../models/Performance");
 const Poll = require("../models/Poll");
 const Question = require("../models/Question");
 const Quiz = require("../models/Quiz");
@@ -90,17 +90,6 @@ router.post("/question/:quizId", async (req, res) => {
   res.send({ quiz });
 });
 
-router.get("/student/overall/:userId/:CourseId", async (req, res) => {
-  const performance = await Performance.findOne({
-    UserId: req.params.userId,
-    CourseId: req.params.courseId,
-  });
-
-  // totalmarks = sum of all quizes results/(total no. of quiz) => decimal
-
-  res.send({ performance: performance.totalmarks });
-});
-
 // Create the Poll
 router.post("/poll/:courseId", async (req, res) => {
   const { title, question } = req.body;
@@ -171,15 +160,21 @@ router.put("/poll/:pollId", async (req, res) => {
   }
 });
 
-router.get("/student/overall/:userId/:CourseId", async (req, res) => {
+router.get("/student/overall/:userId/:courseId", async (req, res) => {
+  // const performance = await Performance.findOne({
+  //   UserId: req.params.userId,
+  //   CourseId: req.params.courseId,
+  // });
+
+  // // totalmarks = sum of all quizes results/(total no. of quiz) => decimal
+
+  // res.send({ performance });
   const performance = await Performance.findOne({
     UserId: req.params.userId,
     CourseId: req.params.courseId,
   });
 
-  // totalmarks = sum of all quizes results/(total no. of quiz) => decimal
-
-  res.send({ performance: performance.totalmarks });
+  res.send({ performance });
 });
 
 module.exports = router;

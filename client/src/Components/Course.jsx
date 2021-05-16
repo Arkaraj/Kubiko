@@ -92,7 +92,13 @@ const Course = (props) => {
               </>
             ) : (
               <button className="btn btn-primary d-flex justify-content-end">
-                <Link to={`/student`} style={{ color: "black" }}>
+                <Link
+                  to={{
+                    pathname: `/performance/${course._id}`,
+                    state: { course },
+                  }}
+                  style={{ color: "black" }}
+                >
                   Result/Performance
                 </Link>
               </button>

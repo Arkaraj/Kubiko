@@ -94,7 +94,7 @@ export default {
     const res = await fetch(
       `/teachers/student/overall/${_userId}/${_courseId}`
     );
-    if (res.status !== 401) return res.json().then((data) => data);
+    if (res.status !== 401) return res.json().then((data) => data.performance);
     else return {};
   },
   createQuiz: async (quiz, _courseId) => {

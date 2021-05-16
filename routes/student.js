@@ -173,7 +173,7 @@ router.get("/class/overall/:courseId", async (req, res) => {
     CourseId: req.params.courseId,
   });
 
-  res.send({ total: performance.totalmarks });
+  res.send({ performance });
 });
 
 module.exports = router;

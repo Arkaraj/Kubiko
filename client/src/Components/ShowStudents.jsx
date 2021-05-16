@@ -38,9 +38,16 @@ const ShowStudents = (props) => {
               <td>{student.email}</td>
               <td>{student.role}</td>
               <td>
-                <button className="btn btn-primary d-flex justify-content-end">
-                  Check Marks
-                </button>
+                <Link
+                  to={{
+                    pathname: `/overall/${student._id}/${id}`,
+                    state: { name: student.name },
+                  }}
+                >
+                  <button className="btn btn-primary d-flex justify-content-end">
+                    Check Marks
+                  </button>
+                </Link>
               </td>
             </tr>
           ))}

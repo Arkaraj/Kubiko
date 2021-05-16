@@ -41,7 +41,7 @@ export default {
   },
   overallMarks: async (_courseId) => {
     const res = await fetch(`/students/class/overall/${_courseId}`);
-    if (res.status !== 401) return res.json().then((data) => data);
+    if (res.status !== 401) return res.json().then((data) => data.performance);
     else return {};
   },
   postQuiz: async (quizMarks, _quizId, _courseId) => {

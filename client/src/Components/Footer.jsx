@@ -119,7 +119,7 @@ const Footer = () => {
             </div>
             <div className="copyright mt-1">
               <p>
-                © 2020 Skill. All Rights Reserved | Design by{" "}
+                © 2020 Kubiko. All Rights Reserved | Design by{" "}
                 <a href="https://w3layouts.com/">Kubiko</a>
               </p>
             </div>
