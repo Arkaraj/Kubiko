@@ -21,6 +21,8 @@ import EditPoll from "./Components/EditPoll";
 import Performance from "./Components/Performance";
 import PrivateRoute from "./Hocs/PrivateRoute";
 import OverallStudentRes from "./Components/OverallStudentRes";
+import TeacherResults from "./Components/teacherResults";
+import TeacherPollResults from "./Components/TeacherPollResults";
 
 const App = () => {
   return (
@@ -45,6 +47,16 @@ const App = () => {
           />
           <SenseiRoutes path="/editQuiz/:quizId" exact component={EditQuiz} />
           <SenseiRoutes path="/editPoll/:pollId" exact component={EditPoll} />
+          <SenseiRoutes
+            path="/result/:quizId"
+            exact
+            component={TeacherResults}
+          />
+          <SenseiRoutes
+            path="/pollResult/:pollId"
+            exact
+            component={TeacherPollResults}
+          />
           <SenseiRoutes
             path="/overall/:userId/:courseId"
             exact

@@ -119,6 +119,16 @@ export default {
     if (res.status !== 401) return res.json().then((data) => data.poll);
     else return {};
   },
+  getQuizResult: async (quizId) => {
+    const res = await fetch(`/teachers/quizResult/${quizId}`);
+    if (res.status !== 401) return res.json().then((data) => data.result);
+    else return {};
+  },
+  getPollResult: async (pollId) => {
+    const res = await fetch(`/teachers/pollResult/${pollId}`);
+    if (res.status !== 401) return res.json().then((data) => data.poll);
+    else return {};
+  },
   deleteRoom: async (_courseId) => {
     const res = await fetch(`/teachers/${_courseId}`, {
       method: "DELETE",

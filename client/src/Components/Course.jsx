@@ -166,7 +166,7 @@ const Course = (props) => {
                               Edit <i class="fas fa-edit"></i>
                             </button>
                           </Link>
-                          <Link>
+                          <Link to={`/result/${quiz._id}`}>
                             <button className="btn btn-warning">
                               View results
                             </button>
@@ -242,9 +242,11 @@ const Course = (props) => {
                             </button>
                           </Link>
                           <Link>
-                            <button className="btn btn-warning">
-                              View results
-                            </button>
+                            <Link to={`/pollResult/${poll._id}`}>
+                              <button className="btn btn-warning">
+                                View Results
+                              </button>
+                            </Link>
                           </Link>
                         </>
                       )}

@@ -36,7 +36,11 @@ const Quiz = (props) => {
 
     // alert(`You got ${quizMarks}/${marks}`);
 
-    StudentService.postQuiz({ quizMarks }, quiz._id, courseId).then((data) => {
+    StudentService.postQuiz(
+      { quizMarks, totalMarks: marks },
+      quiz._id,
+      courseId
+    ).then((data) => {
       console.log(data);
       setResult(data);
       setQuizEnded(true);

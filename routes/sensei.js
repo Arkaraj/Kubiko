@@ -6,6 +6,7 @@ const Question = require("../models/Question");
 const Quiz = require("../models/Quiz");
 const User = require("../models/User");
 const Option = require("../models/Option");
+const Result = require("../models/Result");
 const router = express.Router();
 
 // creates Course room
@@ -160,21 +161,41 @@ router.put("/poll/:pollId", async (req, res) => {
   }
 });
 
+// Show overall marks
 router.get("/student/overall/:userId/:courseId", async (req, res) => {
-  // const performance = await Performance.findOne({
-  //   UserId: req.params.userId,
-  //   CourseId: req.params.courseId,
-  // });
-
-  // // totalmarks = sum of all quizes results/(total no. of quiz) => decimal
-
-  // res.send({ performance });
   const performance = await Performance.findOne({
     UserId: req.params.userId,
     CourseId: req.params.courseId,
   });
 
   res.send({ performance });
+});
+
+// Get Quiz Results
+router.get("/quizResult/:quizId", async (req, res) => {
+  try {
+    const result = await Result.find({ quizId: req.params.quizId })
+      .populate("userId")
+      .exec();
+
+    // console.log(result);
+
+    res.json({ result });
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+});
+// Get Poll Results
+router.get("/pollResult/:pollId", async (req, res) => {
+  try {
+    const poll = await Poll.findById(req.params.pollId).populate("options");
+
+    res.json({ poll });
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
 });
 
 module.exports = router;

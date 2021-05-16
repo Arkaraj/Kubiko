@@ -21,6 +21,7 @@
     "nanoid": "^3.1.22",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "react-google-charts": "^3.0.15",
     "socket.io": "^3.1.2"
   }
 }

@@ -93,8 +93,7 @@ router.delete("/course/:courseId", async (req, res) => {
   res.send({ user });
 });
 
-// Students can write quizzes
-// Work required
+// Students can write quizzes, not required route
 router.post("/quiz/:quizId", async (req, res) => {
   const { quizMarks } = req.body;
 
@@ -128,12 +127,13 @@ router.post("/poll/:optionId", async (req, res) => {
 });
 
 router.post("/marks/:quizId/:courseId", async (req, res) => {
-  const { quizMarks } = req.body;
+  const { quizMarks, totalMarks } = req.body;
 
   const resultModel = {
     quizId: req.params.quizId,
     userId: req.user._id,
     quizMarks,
+    totalMarks,
   };
 
   try {
