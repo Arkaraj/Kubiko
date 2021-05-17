@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../css/quiz.css";
 import StudentService from "../Services/StudentService";
 import QuizCard from "./QuizCard";
@@ -86,7 +87,9 @@ const Quiz = (props) => {
               <h3>
                 You Scored: {result.quizMarks}/{marks}
               </h3>
-              <button>Go Back To Course</button>
+              <Link to="/">
+                <button>Go Back To Course</button>
+              </Link>
             </>
           )}
         </div>

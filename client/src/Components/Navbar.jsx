@@ -56,12 +56,12 @@ const Navbar = (props) => {
                       </Link>
                     </li>
                     <li className="nav-item @@about-active">
-                      <Link className="nav-link" to="/">
+                      <Link className="nav-link" to="/about">
                         About
                       </Link>
                     </li>
                     <li className="nav-item @@services-active">
-                      <Link className="nav-link" to="/">
+                      <Link className="nav-link" to="/service">
                         Services
                       </Link>
                     </li>

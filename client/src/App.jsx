@@ -23,6 +23,8 @@ import PrivateRoute from "./Hocs/PrivateRoute";
 import OverallStudentRes from "./Components/OverallStudentRes";
 import TeacherResults from "./Components/teacherResults";
 import TeacherPollResults from "./Components/TeacherPollResults";
+import About from "./Components/About";
+import Service from "./Components/Service";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/about" exact component={About} />
+          <Route path="/service" exact component={Service} />
           <PublicRoute path="/login" exact component={Login} />
           <PublicRoute path="/register" exact component={Register} />
           <StudentRoutes path="/student" exact component={Student} />

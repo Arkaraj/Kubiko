@@ -15,6 +15,11 @@ const EditQuiz = (props) => {
 
   //   const { title, description, questions } = quiz;
 
+  const freezeQuiz = (e) => {
+    e.preventDefault();
+    console.log("Do some stuff");
+  };
+
   return (
     <div style={{ margin: "1rem" }}>
       <Link onClick={props.history.goBack}>
@@ -22,7 +27,13 @@ const EditQuiz = (props) => {
       </Link>
       {quiz ? (
         <>
-          <h2>Quiz: {quiz.title}</h2>
+          <div className="d-flex justify-content-between">
+            <h2>Quiz: {quiz.title}</h2>
+            <button className="btn btn-primary" onClick={freezeQuiz}>
+              {" "}
+              Close Quiz{" "}
+            </button>
+          </div>
           <h4>Description: {quiz.description}</h4>
           <h4>
             <u>Questions:</u>

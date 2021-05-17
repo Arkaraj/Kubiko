@@ -21,7 +21,8 @@ const Performance = (props) => {
         Your Total marks is: {performance.totalmarks} in {performance.totalQuiz}
       </pre>
       <pre>
-        Total: {(performance.totalmarks / performance.totalQuiz) * 100}%
+        Total:{" "}
+        {((performance.totalmarks / performance.totalQuiz) * 100).toFixed(2)}%
       </pre>
     </div>
   );
