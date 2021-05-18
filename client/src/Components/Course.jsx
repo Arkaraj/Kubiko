@@ -7,6 +7,8 @@ import { AuthContext } from "../Context/AuthContext";
 import GeneralService from "../Services/AuthService";
 import StudentService from "../Services/StudentService";
 import BreadCrum from "./BreadCrum";
+import { VscEdit } from "react-icons/vsc";
+import SenseiService from "../Services/SenseiService";
 
 const Course = (props) => {
   const id = props.match.params.courseId;
@@ -14,6 +16,8 @@ const Course = (props) => {
   let course = props.location.state ? props.location.state.course : crs;
   const [quizzes, setQuizzes] = useState([]);
   const [polls, setPolls] = useState([]);
+  const [edit, setEdit] = useState(false);
+  const [roomMsg, setRoomMsg] = useState(course.message ? course.message : "");
 
   const { user } = useContext(AuthContext);
 
@@ -47,6 +51,18 @@ const Course = (props) => {
     }
   };
 
+  const updateRoomMsg = (e) => {
+    e.preventDefault();
+
+    SenseiService.updateCourseMessage(course._id, { message: roomMsg }).then(
+      (data) => {
+        setRoomMsg(data.message);
+        alert("Updated Room Message!");
+        setEdit(!edit);
+      }
+    );
+  };
+
   return (
     <>
       <BreadCrum path={["Course", `${course.name}`]} />
@@ -64,10 +80,36 @@ const Course = (props) => {
         ) : (
           <h4>You are the Admin of this Course</h4>
         )}
+        <h2>Room Message:</h2>
         {course.message ? (
           <>
-            <h2>Room Message:</h2>
-            <p>{course.message}</p>
+            <div className="d-flex justify-content-between">
+              {!edit ? (
+                <p>{roomMsg}</p>
+              ) : (
+                <>
+                  <input
+                    type="text"
+                    style={{ width: "40%" }}
+                    value={roomMsg}
+                    onChange={(e) => setRoomMsg(e.target.value)}
+                  />
+                  {edit && user.role === "teacher" ? (
+                    <button className="btn btn-warning" onClick={updateRoomMsg}>
+                      Done
+                    </button>
+                  ) : null}
+                </>
+              )}
+              {user.role === "teacher" ? (
+                <button
+                  className="btn btn-warning"
+                  onClick={() => setEdit(!edit)}
+                >
+                  <VscEdit style={{ color: "white" }} />
+                </button>
+              ) : null}
+            </div>
           </>
         ) : (
           <>
@@ -75,6 +117,7 @@ const Course = (props) => {
             <p>Nothing</p>
           </>
         )}
+        <br />
         <div className="row">
           <div className="move">
             {user.role === "teacher" ? (
@@ -128,7 +171,10 @@ const Course = (props) => {
                           {quiz.title}
                         </div>
                         <div className="mb-3">{quiz.description}</div>
-                        <div className="mb-3">Timing: 4 - 4:15</div>
+                        <div className="mb-3">
+                          Timing: 4 - 4:15, Status:{" "}
+                          {quiz.available ? "Open" : "Freezed"}
+                        </div>
                       </div>
                     </div>
                     <div
@@ -166,7 +212,12 @@ const Course = (props) => {
                               Edit <i class="fas fa-edit"></i>
                             </button>
                           </Link>
-                          <Link to={`/result/${quiz._id}`}>
+                          <Link
+                            to={{
+                              pathname: `/result/${quiz._id}`,
+                              state: { courseId: course._id },
+                            }}
+                          >
                             <button className="btn btn-warning">
                               View results
                             </button>
@@ -204,7 +255,10 @@ const Course = (props) => {
                           {poll.question}
                         </div>
                         <div className="mb-3">{poll.title}</div>
-                        <div className="mb-3">Timing: 3 - 3:45pm</div>
+                        <div className="mb-3">
+                          Timing: 3 - 3:45pm, Status:{" "}
+                          {poll.available ? "Open" : "Freezed"}
+                        </div>
                       </div>
                     </div>
                     <div

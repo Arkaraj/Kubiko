@@ -16,11 +16,12 @@ const OverallStudentRes = (props) => {
   }, [userId, courseId]);
 
   return (
-    <div>
-      {result ? (
-        <pre>
-          {name} Total Marks: {result.totalmarks} in {result.totalQuiz} quizzes
-        </pre>
+    <div className="card card-5">
+      {result.totalmarks ? (
+        <h5>
+          {name} Total Marks: {result.totalmarks.toFixed(2)} in{" "}
+          {result.totalQuiz} quizzes
+        </h5>
       ) : (
         <>
           <h2>Sorry {name} has not give the test yet</h2>

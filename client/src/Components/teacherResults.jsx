@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 const TeacherResults = (props) => {
   let id = props.match.params.quizId;
 
+  let { courseId } = props.location.state ? props.location.state : "";
+
   const [result, setResult] = useState([]);
 
   useEffect(() => {
     SenseiService.getQuizResult(id).then((data) => {
       setResult(data);
+      console.log(data);
     });
   }, [id]);
 
@@ -42,8 +45,8 @@ const TeacherResults = (props) => {
               <td>
                 <Link
                   to={{
-                    pathname: `/overall/${res._id}/${id}`,
-                    state: { name: res.name },
+                    pathname: `/overall/${res.userId._id}/${courseId}`,
+                    state: { name: res.userId.name },
                   }}
                 >
                   <button className="btn btn-primary d-flex justify-content-center mx-auto">

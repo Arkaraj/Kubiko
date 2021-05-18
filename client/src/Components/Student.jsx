@@ -27,6 +27,7 @@ const Student = () => {
       } else {
         console.log(data.course);
         setCourses([...courses, data.course]);
+        alert(`Joined ${data.course.name}`);
       }
     });
   };

@@ -42,7 +42,8 @@ const CreateQuiz = (props) => {
     e.preventDefault();
     SenseiService.createQuestion(question, quizInfo._id).then((data) => {
       console.log(data);
-      setDone(true);
+      setDone(false);
+      alert("Question pushed");
     });
   };
 
@@ -64,7 +65,7 @@ const CreateQuiz = (props) => {
   };
 
   const onChangeQuestion = (e, indx) => {
-    e.preventDefault();
+    // e.preventDefault();
     let newOptions = JSON.parse(JSON.stringify(questions));
     newOptions[indx][e.target.name] = e.target.value;
     setQuestions([...newOptions]);

@@ -15,15 +15,25 @@ const Performance = (props) => {
   }, [id]);
 
   return (
-    <div>
+    <div className="card card-5">
       <h2>hi {user.name}</h2>
-      <pre>
-        Your Total marks is: {performance.totalmarks} in {performance.totalQuiz}
-      </pre>
-      <pre>
-        Total:{" "}
-        {((performance.totalmarks / performance.totalQuiz) * 100).toFixed(2)}%
-      </pre>
+      {performance.totalmarks ? (
+        <>
+          <pre>
+            Your Total marks is: {performance.totalmarks.toFixed(2)} in{" "}
+            {performance.totalQuiz}
+          </pre>
+          <pre>
+            Total:{" "}
+            {((performance.totalmarks / performance.totalQuiz) * 100).toFixed(
+              2
+            )}
+            %
+          </pre>
+        </>
+      ) : (
+        <h2>Loading...</h2>
+      )}
     </div>
   );
 };

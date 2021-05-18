@@ -75,7 +75,7 @@ const App = () => {
           />
         </Switch>
         <PrivateRoute path="/course/:courseId" exact component={Course} />
-        <Route
+        <SenseiRoutes
           path="/course/:courseId/students"
           exact
           component={ShowStudents}

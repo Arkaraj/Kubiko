@@ -17,7 +17,10 @@ const EditQuiz = (props) => {
 
   const freezeQuiz = (e) => {
     e.preventDefault();
-    console.log("Do some stuff");
+    SenseiService.updateQuiz(quiz._id).then((data) => {
+      console.log(data);
+      props.history.goBack();
+    });
   };
 
   return (

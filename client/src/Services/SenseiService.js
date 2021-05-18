@@ -129,6 +129,17 @@ export default {
     if (res.status !== 401) return res.json().then((data) => data.poll);
     else return {};
   },
+  updateCourseMessage: async (courseId, message) => {
+    const res = await fetch(`/teachers/message/${courseId}`, {
+      method: "POST",
+      body: JSON.stringify(message),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.status !== 401) return res.json().then((data) => data.course);
+    else return {};
+  },
   deleteRoom: async (_courseId) => {
     const res = await fetch(`/teachers/${_courseId}`, {
       method: "DELETE",

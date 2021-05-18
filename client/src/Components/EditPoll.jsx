@@ -14,6 +14,13 @@ const EditPoll = (props) => {
   }, [id]);
 
   //   const { title, description, questions } = quiz;
+  const freezePoll = (e) => {
+    e.preventDefault();
+    SenseiService.updatePoll(poll._id).then((data) => {
+      console.log(data);
+      props.history.goBack();
+    });
+  };
 
   return (
     <div style={{ margin: "1rem" }}>
@@ -22,7 +29,13 @@ const EditPoll = (props) => {
       </Link>
       {poll ? (
         <>
-          <h2>Poll: {poll.title}</h2>
+          <div className="d-flex justify-content-between">
+            <h2>Poll: {poll.title}</h2>
+            <button className="btn btn-primary" onClick={freezePoll}>
+              {" "}
+              Close Quiz{" "}
+            </button>
+          </div>
           <h4>Question: {poll.question}</h4>
           <h4>
             <u>Options:</u>

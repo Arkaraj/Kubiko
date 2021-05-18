@@ -32,6 +32,22 @@ router.get("/course", async (req, res) => {
   res.send({ course });
 });
 
+router.post("/message/:courseId", async (req, res) => {
+  const { message } = req.body;
+
+  try {
+    const course = await Course.findById(req.params.courseId);
+
+    course.message = message;
+    await course.save();
+
+    res.json({ course });
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+});
+
 // Gets all student in the course
 router.get("/students/:courseId", async (req, res) => {
   const courseModel = await Course.findById(req.params.courseId).populate(

@@ -59,9 +59,10 @@ const CreatePoll = (props) => {
 
   const submitPoll = (e, option) => {
     e.preventDefault();
-    inputRef.current.disabled = true;
+    // inputRef.current.disabled = true;
     SenseiService.createOption(option, pollInfo._id).then((data) => {
       console.log(data);
+      alert("Created Option!");
     });
   };
 

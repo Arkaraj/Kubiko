@@ -374,12 +374,12 @@ export default function About() {
                       <span className="post">Managing Director</span>
                       <ul className="social">
                         <li>
-                          <a href="#" className="facebook">
+                          <a href="/" className="facebook">
                             <span className="fa fa-facebook-f" />
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="twitter">
+                          <a href="/" className="twitter">
                             <span className="fa fa-twitter" />
                           </a>
                         </li>
@@ -399,12 +399,12 @@ export default function About() {
                       <span className="post">Designer</span>
                       <ul className="social">
                         <li>
-                          <a href="#" className="facebook">
+                          <a href="/" className="facebook">
                             <span className="fa fa-facebook-f" />
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="twitter">
+                          <a href="/" className="twitter">
                             <span className="fa fa-twitter" />
                           </a>
                         </li>
@@ -424,12 +424,12 @@ export default function About() {
                       <span className="post">Designer</span>
                       <ul className="social">
                         <li>
-                          <a href="#" className="facebook">
+                          <a href="/" className="facebook">
                             <span className="fa fa-facebook-f" />
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="twitter">
+                          <a href="/" className="twitter">
                             <span className="fa fa-twitter" />
                           </a>
                         </li>
@@ -449,12 +449,12 @@ export default function About() {
                       <span className="post">Director</span>
                       <ul className="social">
                         <li>
-                          <a href="#" className="facebook">
+                          <a href="/" className="facebook">
                             <span className="fa fa-facebook-f" />
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="twitter">
+                          <a href="/" className="twitter">
                             <span className="fa fa-twitter" />
                           </a>
                         </li>
@@ -474,12 +474,12 @@ export default function About() {
                       <span className="post">Managing Director</span>
                       <ul className="social">
                         <li>
-                          <a href="#" className="facebook">
+                          <a href="/" className="facebook">
                             <span className="fa fa-facebook-f" />
                           </a>
                         </li>
                         <li>
-                          <a href="#" className="twitter">
+                          <a href="/" className="twitter">
                             <span className="fa fa-twitter" />
                           </a>
                         </li>
