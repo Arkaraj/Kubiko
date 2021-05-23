@@ -87,7 +87,7 @@ router.delete("/course/:courseId", async (req, res) => {
 
   const course = await Course.findById(req.params.courseId);
 
-  course.students.filter((s) => s != req.user._id);
+  course.students = course.students.filter((s) => s != req.user._id.toString());
   await course.save();
 
   res.send({ user });

@@ -25,6 +25,8 @@ import TeacherResults from "./Components/teacherResults";
 import TeacherPollResults from "./Components/TeacherPollResults";
 import About from "./Components/About";
 import Service from "./Components/Service";
+import Chat from "./Components/Chat";
+import Contact from "./Components/Contact";
 
 const App = () => {
   return (
@@ -35,6 +37,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/about" exact component={About} />
           <Route path="/service" exact component={Service} />
+          <Route path="/contact" exact component={Contact} />
           <PublicRoute path="/login" exact component={Login} />
           <PublicRoute path="/register" exact component={Register} />
           <StudentRoutes path="/student" exact component={Student} />
@@ -80,6 +83,9 @@ const App = () => {
           exact
           component={ShowStudents}
         />
+        <div>
+          <Chat />
+        </div>
         <Footer />
       </div>
     </Router>

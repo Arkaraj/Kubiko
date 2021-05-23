@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import SenseiService from "../Services/SenseiService";
 import { Link } from "react-router-dom";
 
@@ -18,10 +18,9 @@ const CreatePoll = (props) => {
   const [pollCreated, setPollCreated] = useState(false);
   const [pollInfo, setPollInfo] = useState(false);
 
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
 
   const handleOptionInput = (e, i) => {
-    // e.preventDefault();
     let newOptions = JSON.parse(JSON.stringify(options));
     newOptions[i].option = e.target.value;
     setOptions(newOptions);
@@ -73,7 +72,7 @@ const CreatePoll = (props) => {
           <div className="form-group">
             <label htmlFor={"Input" + (i + 1)}>{"Poll Item " + (i + 1)}</label>
             <input
-              key={i}
+              key={Math.random()}
               className="form-control input-lg"
               id={"Input" + (i + 1)}
               type="text"
@@ -84,7 +83,7 @@ const CreatePoll = (props) => {
             />
 
             <input
-              ref={inputRef}
+              // ref={inputRef}
               type="button"
               className="btn btn-success pull-right"
               value="Submit Poll"

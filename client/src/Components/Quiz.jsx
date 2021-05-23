@@ -87,7 +87,7 @@ const Quiz = (props) => {
               <h3>
                 You Scored: {result.quizMarks}/{marks}
               </h3>
-              <Link to="/">
+              <Link to="/student">
                 <button>Go Back To Course</button>
               </Link>
             </>
