@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
+import { MdChromeReaderMode } from "react-icons/md";
 
 const QuizCard = ({ quiz, indx, options, setOptions, answers }) => {
+  const synthRef = useRef(window.speechSynthesis);
+
   const onChange = (e) => {
     let newOptions = JSON.parse(JSON.stringify(options));
     newOptions[indx].option = e.target.value;
@@ -13,9 +16,32 @@ const QuizCard = ({ quiz, indx, options, setOptions, answers }) => {
     }
   };
 
+  // Using function instead of const thing for a change
+  function textToSpeech() {
+    const text = `Question: ${quiz.question}, option 1: ${quiz.option1}, option 2: ${quiz.option2},option 3: ${quiz.option3},option 4: ${quiz.option4}, marks for the question: ${quiz.marks}`;
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 0.7;
+    utter.pitch = 1;
+    // utter.lang = ""; // zh-cn, es-es, de-de
+    synthRef.current.speak(utter);
+  }
+
   return (
     <div className="modal-dialog">
       <div className="modal-content">
+        <button
+          onClick={textToSpeech}
+          style={{
+            width: "fitContent",
+            marginLeft: "auto",
+            marginRight: "1rem",
+          }}
+        >
+          <h6>
+            <MdChromeReaderMode style={{ width: "1.2rem", height: "1.2rem" }} />
+          </h6>
+        </button>
         <div
           className="modal-header"
           style={{ display: "block", padding: "1rem" }}

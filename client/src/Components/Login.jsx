@@ -61,6 +61,7 @@ const Login = (props) => {
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-yellow-500"
                         value={user.email}
                         onChange={onChange}
+                        required
                         placeholder="arkaraj@test.com"
                       />
                     </div>
@@ -80,6 +81,7 @@ const Login = (props) => {
                         name="password"
                         value={user.password}
                         className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-yellow-500"
+                        required
                         onChange={onChange}
                         placeholder="************"
                       />

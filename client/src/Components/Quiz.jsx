@@ -60,7 +60,11 @@ const Quiz = (props) => {
               <div>
                 {/* <pre>{JSON.stringify(quiz, null, 2)}</pre> */}
                 {quiz.questions.map((q, indx) => (
-                  <form onSubmit={postAnswers}>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                    }}
+                  >
                     <QuizCard
                       quiz={q}
                       indx={indx}

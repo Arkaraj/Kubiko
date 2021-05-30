@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Chat extends Component {
+class Chatbot extends Component {
   constructor(props) {
     super(props);
 
@@ -31,4 +31,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default Chatbot;

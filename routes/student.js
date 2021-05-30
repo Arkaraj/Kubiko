@@ -152,8 +152,8 @@ router.post("/marks/:quizId/:courseId", async (req, res) => {
           CourseId: req.params.courseId,
         });
         performance.totalQuiz += 1;
-
-        const stats = quizMarks + performance.totalmarks;
+        performance.totalAnswerMarks = totalMarks;
+        const stats = quizMarks / totalMarks + performance.totalmarks;
 
         performance.totalmarks = stats / performance.totalQuiz;
 

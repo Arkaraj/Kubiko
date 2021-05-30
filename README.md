@@ -12,6 +12,7 @@ Education is a constitutional right of every citizen that prepares an individual
 - Visual Representation of choices distribution among student from pie chart
 - Class Raking after the quiz, easy for students to see where they stand in the class.
 - Student Dashboards
+- Chatbot
 
 ## To run it
 
@@ -90,13 +91,4 @@ Enjoy!
 
 - [x] Context
 - [x] Authorization Services
-
-#### Pages and components
-
-- [x] Landing page
-- [] NavBar (on authentication state change part is left)
-- [x] Login Page
-- [x] Register Page
-- [] Student dashboard (static for now)
-- [] Quiz creator (static for now)
-- [] Quiz attempt (static for now)
+- [x] Components

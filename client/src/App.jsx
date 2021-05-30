@@ -25,8 +25,9 @@ import TeacherResults from "./Components/teacherResults";
 import TeacherPollResults from "./Components/TeacherPollResults";
 import About from "./Components/About";
 import Service from "./Components/Service";
-import Chat from "./Components/Chat";
+import Chatbot from "./Components/Chatbot";
 import Contact from "./Components/Contact";
+// import { renderButtons, launchAsync }  from  "@microsoft/immersive-reader-sdk";
 
 const App = () => {
   return (
@@ -84,7 +85,7 @@ const App = () => {
           component={ShowStudents}
         />
         <div>
-          <Chat />
+          <Chatbot />
         </div>
         <Footer />
       </div>
