@@ -17,6 +17,7 @@ router.post("/course", async (req, res) => {
     name,
     description,
     creator: [req.user._id],
+    message: "All Quizzes in the room is Mandatory",
   };
 
   const course = await (await Course.create(courseModel)).save();
