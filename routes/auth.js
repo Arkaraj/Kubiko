@@ -60,19 +60,17 @@ router.post("/login", (req, res) => {
 
   Users.findOne({ email }, function (err, user) {
     if (err) {
-      //console.log('Error ' + err)
-      res
+      return res
         .status(500)
         .json({ message: { msg: "Error has occured", msgError: true } });
     }
     if (!user) {
-      res
+      return res
         .status(400)
         .json({ message: { msg: "Invalid Email", msgError: true } });
     } else {
       bcrypt.compare(password, user.password, function (err, validate) {
         if (err) {
-          //console.log('Error ' + err)
           res.status(500).json({
             message: { msg: "Error has occured in bcrypt", msgError: true },
           });

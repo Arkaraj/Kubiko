@@ -6,6 +6,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 const Login = (props) => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const [msg, setMsg] = useState("");
   const authContext = useContext(AuthContext);
 
   const onChange = (e) => {
@@ -16,15 +17,21 @@ const Login = (props) => {
     e.preventDefault();
 
     AuthService.login(user).then((data) => {
-      const { user, isAuthenticated } = data;
+      if (data.user) {
+        const { user, isAuthenticated } = data;
 
-      authContext.setUser(user);
-      authContext.setIsAuthenticated(isAuthenticated);
-      authContext.setRole(user.role);
-      if (user.role === "student") {
-        props.history.push("./student");
+        authContext.setUser(user);
+        authContext.setIsAuthenticated(isAuthenticated);
+        authContext.setRole(user.role);
+        setMsg("Successful Login");
+        if (user.role === "student") {
+          props.history.push("./student");
+        } else {
+          props.history.push("./teacher");
+        }
       } else {
-        props.history.push("./teacher");
+        setMsg("Incorrect Login");
+        // alert("Incorrect Login");
       }
     });
   };
@@ -62,7 +69,7 @@ const Login = (props) => {
                         value={user.email}
                         onChange={onChange}
                         required
-                        placeholder="arkaraj@test.com"
+                        placeholder="email@test.com"
                       />
                     </div>
                   </div>
@@ -102,6 +109,15 @@ const Login = (props) => {
                       >
                         Register
                       </Link>
+                      {msg ? (
+                        <>
+                          <br />
+                          <hr />
+                          <h4>{msg}</h4>
+                        </>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>

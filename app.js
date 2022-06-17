@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 const auth = require("./routes/auth");
 const student = require("./routes/student");
@@ -15,7 +16,7 @@ const isStudent = require("./middlewares/isStudent");
 const Course = require("./models/Course");
 
 mongoose.connect(
-  `mongodb://localhost/QuizHack`,
+  `${process.env.MONGO_URL}`,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
   () => {
     console.log("Successfully connected to Database!!");
@@ -59,9 +60,17 @@ app.use(
 
 const port = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.status(200).json({ msg: "Working" });
-});
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.status(200).json({ msg: "API Working" });
+  });
+}
 
 app.listen(port, () => {
   console.log(`Listening on port ${port} 🚀`);

@@ -14,6 +14,10 @@ Education is a constitutional right of every citizen that prepares an individual
 - Student Dashboards
 - Chatbot
 
+## Website
+
+https://kubiko.herokuapp.com/
+
 ## To run it
 
 Make a .env file, inside .env file:

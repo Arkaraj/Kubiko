@@ -19,7 +19,7 @@ export default {
         "Content-Type": "application/json",
       },
     });
-    if (res.status !== 401) return res.json().then((data) => data);
+    if (res.status === 200) return res.json().then((data) => data);
     // We get the user data
     else return { isAuthenticated: false };
   },
